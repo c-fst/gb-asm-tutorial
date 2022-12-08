@@ -3,13 +3,13 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Tilemap - GB ASM Tutorial</title>
+        <title>Functions - GB ASM Tutorial</title>
 
 
         <!-- Custom HTML head -->
         <meta name="twitter:card" content="summary_large_image"/>
         <meta name="twitter:site:id" content="@issotm"/>
-        <meta property="og:title" content="Tilemap - GB ASM Tutorial" />
+        <meta property="og:title" content="Functions - GB ASM Tutorial" />
         <meta property="og:image" content="https://eldred.fr/gb-asm-tutorial/assets/banner/1200x628.png" />
         <meta property="og:site_name" content="GB ASM Tutorial"/>
 
@@ -87,7 +87,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><a href="../index.html">Home</a></li><li class="chapter-item affix "><a href="../roadmap.html">Roadmap</a></li><li class="chapter-item affix "><a href="../help-feedback.html">Help and feedback</a></li><li class="chapter-item affix "><li class="part-title">Part Ⅰ — Hello World!</li><li class="chapter-item "><a href="../part1/setup.html"><strong aria-hidden="true">1.</strong> Setup</a></li><li class="chapter-item "><a href="../part1/hello_world.html"><strong aria-hidden="true">2.</strong> Hello World!</a></li><li class="chapter-item "><a href="../part1/toolchain.html"><strong aria-hidden="true">3.</strong> The toolchain</a></li><li class="chapter-item "><a href="../part1/bin_and_hex.html"><strong aria-hidden="true">4.</strong> Binary and hexadecimal</a></li><li class="chapter-item "><a href="../part1/registers.html"><strong aria-hidden="true">5.</strong> Registers</a></li><li class="chapter-item "><a href="../part1/assembly.html"><strong aria-hidden="true">6.</strong> Assembly basics</a></li><li class="chapter-item "><a href="../part1/memory.html"><strong aria-hidden="true">7.</strong> Memory</a></li><li class="chapter-item "><a href="../part1/header.html"><strong aria-hidden="true">8.</strong> The header</a></li><li class="chapter-item "><a href="../part1/operations.html"><strong aria-hidden="true">9.</strong> Operations & flags</a></li><li class="chapter-item "><a href="../part1/jumps.html"><strong aria-hidden="true">10.</strong> Jumps</a></li><li class="chapter-item "><a href="../part1/tracing.html"><strong aria-hidden="true">11.</strong> Tracing</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">12.</strong> Graphics</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part1/tiles.html"><strong aria-hidden="true">12.1.</strong> Tiles</a></li><li class="chapter-item "><a href="../part1/palettes.html"><strong aria-hidden="true">12.2.</strong> Palettes</a></li><li class="chapter-item expanded "><a href="../part1/tilemap.html" class="active"><strong aria-hidden="true">12.3.</strong> Tilemap</a></li></ol></li><li class="chapter-item "><a href="../part1/wrapup.html"><strong aria-hidden="true">13.</strong> Wrapping up</a></li><li class="chapter-item affix "><li class="part-title">Part Ⅱ — Our first game</li><li class="chapter-item "><a href="../part2/getting-started.html"><strong aria-hidden="true">14.</strong> Getting started</a></li><li class="chapter-item "><a href="../part2/objects.html"><strong aria-hidden="true">15.</strong> Objects</a></li><li class="chapter-item "><a href="../part2/functions.html"><strong aria-hidden="true">16.</strong> Functions</a></li><li class="chapter-item "><a href="../part2/input.html"><strong aria-hidden="true">17.</strong> Input</a></li><li class="chapter-item "><a href="../part2/wip.html"><strong aria-hidden="true">18.</strong> Work in progress</a></li><li class="chapter-item affix "><li class="part-title">Part Ⅲ — Our second game</li><li class="chapter-item "><div><strong aria-hidden="true">19.</strong> To be written...</div></li><li class="spacer"></li><li class="chapter-item affix "><a href="../next.html">Where to go next</a></li><li class="chapter-item affix "><a href="../resources.html">Resources</a></li><li class="chapter-item affix "><a href="../thanks.html">Thanks</a></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><a href="../index.html">Home</a></li><li class="chapter-item affix "><a href="../roadmap.html">Roadmap</a></li><li class="chapter-item affix "><a href="../help-feedback.html">Help and feedback</a></li><li class="chapter-item affix "><li class="part-title">Part Ⅰ — Hello World!</li><li class="chapter-item "><a href="../part1/setup.html"><strong aria-hidden="true">1.</strong> Setup</a></li><li class="chapter-item "><a href="../part1/hello_world.html"><strong aria-hidden="true">2.</strong> Hello World!</a></li><li class="chapter-item "><a href="../part1/toolchain.html"><strong aria-hidden="true">3.</strong> The toolchain</a></li><li class="chapter-item "><a href="../part1/bin_and_hex.html"><strong aria-hidden="true">4.</strong> Binary and hexadecimal</a></li><li class="chapter-item "><a href="../part1/registers.html"><strong aria-hidden="true">5.</strong> Registers</a></li><li class="chapter-item "><a href="../part1/assembly.html"><strong aria-hidden="true">6.</strong> Assembly basics</a></li><li class="chapter-item "><a href="../part1/memory.html"><strong aria-hidden="true">7.</strong> Memory</a></li><li class="chapter-item "><a href="../part1/header.html"><strong aria-hidden="true">8.</strong> The header</a></li><li class="chapter-item "><a href="../part1/operations.html"><strong aria-hidden="true">9.</strong> Operations & flags</a></li><li class="chapter-item "><a href="../part1/jumps.html"><strong aria-hidden="true">10.</strong> Jumps</a></li><li class="chapter-item "><a href="../part1/tracing.html"><strong aria-hidden="true">11.</strong> Tracing</a></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> Graphics</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part1/tiles.html"><strong aria-hidden="true">12.1.</strong> Tiles</a></li><li class="chapter-item "><a href="../part1/palettes.html"><strong aria-hidden="true">12.2.</strong> Palettes</a></li><li class="chapter-item "><a href="../part1/tilemap.html"><strong aria-hidden="true">12.3.</strong> Tilemap</a></li></ol></li><li class="chapter-item "><a href="../part1/wrapup.html"><strong aria-hidden="true">13.</strong> Wrapping up</a></li><li class="chapter-item affix "><li class="part-title">Part Ⅱ — Our first game</li><li class="chapter-item "><a href="../part2/getting-started.html"><strong aria-hidden="true">14.</strong> Getting started</a></li><li class="chapter-item "><a href="../part2/objects.html"><strong aria-hidden="true">15.</strong> Objects</a></li><li class="chapter-item expanded "><a href="../part2/functions.html" class="active"><strong aria-hidden="true">16.</strong> Functions</a></li><li class="chapter-item "><a href="../part2/input.html"><strong aria-hidden="true">17.</strong> Input</a></li><li class="chapter-item "><a href="../part2/wip.html"><strong aria-hidden="true">18.</strong> Work in progress</a></li><li class="chapter-item affix "><li class="part-title">Part Ⅲ — Our second game</li><li class="chapter-item "><div><strong aria-hidden="true">19.</strong> To be written...</div></li><li class="spacer"></li><li class="chapter-item affix "><a href="../next.html">Where to go next</a></li><li class="chapter-item affix "><a href="../resources.html">Resources</a></li><li class="chapter-item affix "><a href="../thanks.html">Thanks</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -125,7 +125,7 @@
                         <a href="https://github.com/ISSOtm/gb-asm-tutorial" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/ISSOtm/gb-asm-tutorial/edit/master/src/part1/tilemap.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/ISSOtm/gb-asm-tutorial/edit/master/src/part2/functions.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -154,69 +154,111 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="tilemap"><a class="header" href="#tilemap">Tilemap</a></h1>
-<div class="box tip decorated">
-<div><p>🧐</p></div>
-<div>
-<p>Some spell them “tile map”, some “tilemap”.
-I will be using the latter by preference, but I also stay consistent with it in the code (<code>Tilemap</code> and not <code>TileMap</code>), as well as later when we will talk about attribute maps (“attrmap” and <code>Attrmap</code> instead of <code>AttrMap</code>).</p>
-</div>
-</div>
-<p>We are <em>almost</em> there.
-We have seen how graphics on the Game Boy are composed of 8×8 “tiles”, and we have seen how color is added into the mix.</p>
-<p>But we have not seen yet how those tiles are arranged into a final picture!</p>
-<p>Tiles are basically a grid of pixels; well, the tilemaps are basically a grid of tiles!
-To allow for cheap reuse, tiles aren’t stored in the tilemap directly; instead, tiles are referred to by an <em>ID</em>, which you can see in BGB’s VRAM viewer.</p>
-<figure>
-  <img src="../assets/img/tile_id.png" alt="Screenshot highlighting where a tile's ID can be seen">
-  <figcaption>
-    The ID is displayed in hexadecimal without a prefix, so this is tile number $10, aka 16.
-    As you may have noticed, the tiles are displayed in rows of 16, so it's easier to locate them by hexadecimal ID.
-    Nifty!
-  </figcaption>
-</figure>
-<p>Now, of course, tile IDs are numbers, like everything that computers deal with.
-IDs are stored in bytes, so there are 256 possible tile IDs.
-However, the astute reader will have noticed that there are 384 tiles in total<sup class="footnote-reference"><a href="#tile_blocks">1</a></sup>!
-By virtue of the <a href="https://en.wikipedia.org/wiki/Pigeonhole_principle">pigeonhole principle</a>, this means that some IDs refer to several tiles at the same time.</p>
-<p>Indeed, BGB reports that the first 128 tiles have the same IDs as the last 128.
-There exists a mechanism to select whether IDs 0–127 reference the first or last 128 tiles, but for simplicity’s sake, we will overlook this for now, so please ignore the first (topmost) 128 tiles for the time being.</p>
-<p>Now, please turn your attention to the “BG map” tab of BGB’s VRAM viewer, pictured below.</p>
-<p><img src="../assets/img/tilemap_viewer.png" alt="Screenshot of the tilemap viewer" /></p>
-<div class="box tip">
-<p>You may notice that the image shown is larger than what is displayed on-screen.
-Only part of the tilemap, outlined by a thicker border in the VRAM viewer, is displayed on-screen at a given time.
-We will explain this in more detail in Part Ⅱ.</p>
-</div>
-<p>Here we will be able to see the power of tile reuse in full force.
-As a convenience and a refresher, here are the tiles our Hello World loads into VRAM:</p>
-<p><img src="../assets/img/hello_world_tiles.png" alt="Enlarged view of the tiles loaded in VRAM" /></p>
-<p>You can see that we only loaded a single “blank” tile ($00, the first aka. top-left one), but it can be repeated to cover the whole background at no extra cost!</p>
-<p>Repetition can be more subtle: for example, tile $01 is used for the top-left corner of the H, E, L, L, and W (red lines below)!
-The R, L, and D also both share their top-left tile ($2D, blue lines below); and so on.
-You can confirm this by hovering over tiles in the BG map tab, which shows the ID of the tile at that position.</p>
-<figure>
-  <img src="../assets/img/hello_world_mappings.svg" alt="Diagram of some tile mappings">
-  <figcaption>
-    Here are some examples of tile reuse. Not everything is drawn, as it would become a mess.
-  </figcaption>
-</figure>
-<p>All in all, we can surmise that displaying graphics on the Game Boy consists of loading “patterns” (the tiles), and then telling the console which tile to display for each given location.</p>
-<hr />
-<div class="footnote-definition" id="tile_blocks"><sup class="footnote-definition-label">1</sup>
-<p>The even more astute (astuter?) reader will have noticed that 384 = 3 × 128.
-Thus, tiles are often conceptually grouped into three “blocks” of 128 tiles each, which BGB shows as separated by thicker horizontal lines.</p>
-</div>
+                        <h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
+<p>So far, we have only written a single “flow” of code, but we can already spot some snippets that look redundant.
+Let’s use <strong>functions</strong> to “factor out” code!</p>
+<p>For example, in three places, we are copying chunks of memory around.
+Let’s write a function below the <code>jp Main</code>, and let’s call it <code>Memcpy</code>, like <a href="https://man7.org/linux/man-pages/man3/memcpy.3.html">the similar C function</a>:</p>
+<pre><code class="language-rgbasm linenos start=93">; Copy bytes from one area to another.
+; @param de: Source
+; @param hl: Destination
+; @param bc: Length
+Memcopy:
+	ld a, [de]
+	ld [hli], a
+	inc de
+	dec bc
+	ld a, b
+	or a, c
+	jp nz, Memcopy
+	ret
+</code></pre>
+<p>The new <code>ret</code> instruction should immediately catch our eye.
+It is, unsurprisingly, what makes execution <em>return</em> to where the function was <em>called</em> from.
+Importantly, many languages have a definite “end” to a function: in C or Rust, that’s the closing brace <code>}</code>; in Pascal or Lua, the keyword <code>end</code>, and so on; the function implicitly returns when execution reaches its end.
+However, <strong>this is not the case in assembly</strong>, so you must remember to add a <code>ret</code> instruction at the end of the function to return from it!
+Otherwise, the results are unpredictable.</p>
+<p>Notice the comment above the function, explaining which registers it takes as input.
+This comment is important so that you know how to interface with the function; assembly has no formal parameters, so comments explaining them are even more important than with other languages.
+We’ll see more of those as we progress.</p>
+<p>There are three places in the initialization code where we can use the <code>Memcpy</code> function.
+Find each of these copy loops and replace them with a call to <code>Memcpy</code>; for this, we use the <code>call</code> instruction.
+The registers serve as parameters to the function, so we’ll leave them as-is.</p>
+<div class="table-wrapper"><table><thead><tr><th>Before</th><th>After</th></tr></thead><tbody><tr><td>
+<pre><code class="language-rgbasm linenos start=20">	; Copy the tile data
+	ld de, Tiles
+	ld hl, $9000
+	ld bc, TilesEnd - Tiles
+CopyTiles:
+	ld a, [de]
+	ld [hli], a
+	inc de
+	dec bc
+	ld a, b
+	or a, c
+	jp nz, CopyTiles
+</code></pre>
+</td><td>
+<pre><code class="language-rgbasm linenos start=20">	; Copy the tile data
+	ld de, Tiles
+	ld hl, $9000
+	ld bc, TilesEnd - Tiles
+	call Memcopy
+</code></pre>
+</td></tr><tr><td>
+<pre><code class="language-rgbasm linenos start=33">	; Copy the tilemap
+	ld de, Tilemap
+	ld hl, $9800
+	ld bc, TilemapEnd - Tilemap
+CopyTilemap:
+	ld a, [de]
+	ld [hli], a
+	inc de
+	dec bc
+	ld a, b
+	or a, c
+	jp nz, CopyTilemap
+</code></pre>
+</td><td>
+<pre><code class="language-rgbasm linenos start=26">	; Copy the tilemap
+	ld de, Tilemap
+	ld hl, $9800
+	ld bc, TilemapEnd - Tilemap
+	call Memcopy
+</code></pre>
+</td></tr><tr><td>
+<pre><code class="language-rgbasm linenos start=46">	; Copy the tile data
+	ld de, Paddle
+	ld hl, $8000
+	ld bc, PaddleEnd - Paddle
+CopyPaddle:
+	ld a, [de]
+	ld [hli], a
+	inc de
+	dec bc
+	ld a, b
+	or a, c
+	jp nz, CopyPaddle
+</code></pre>
+</td><td>
+<pre><code class="language-rgbasm linenos start=32">	; Copy the tile data
+	ld de, Paddle
+	ld hl, $8000
+	ld bc, PaddleEnd - Paddle
+	call Memcopy
+</code></pre>
+</td></tr></tbody></table></div>
+<p>In the next chapter, we’ll write another function, this time to read player input.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../part1/palettes.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../part2/objects.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../part1/wrapup.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../part2/input.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -226,11 +268,11 @@ Thus, tiles are often conceptually grouped into three “blocks” of 128 tiles 
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../part1/palettes.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../part2/objects.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../part1/wrapup.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../part2/input.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
