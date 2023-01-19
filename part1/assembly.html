@@ -182,8 +182,12 @@ They’re the difference between “Pre-heat the oven at 180 °C” and “Pre-h
 In any language, good comments are very useful; in assembly, they play an even more important role, as many common semantic facilities are not available.</p>
 <h2 id="instructions"><a class="header" href="#instructions">Instructions</a></h2>
 <p>Assembly is a very line-based language.
-Each line can contain a <em>directive</em>, which instructs RGBASM to do something, or an <em>instruction</em><sup class="footnote-reference"><a href="#instr_directive">1</a></sup>, which is copied directly into the ROM.
-We will talk about directives later, for now let’s focus on instructions: for example, in the snippet above, we will ignore lines 1 (<code>INCLUDE</code>), 7 (<code>ds</code>), and 3 (<code>SECTION</code>).</p>
+Each line can contain one of two things:</p>
+<ul>
+<li>a <em>directive</em>, which instructs RGBASM to do something, or</li>
+<li>an <em>instruction</em><sup class="footnote-reference"><a href="#instr_directive">1</a></sup>, which is written directly into the ROM.</li>
+</ul>
+<p>We will talk about directives later, for now let’s focus on instructions: for example, in the snippet above, we will ignore lines 1 (<code>INCLUDE</code>), 7 (<code>ds</code>), and 3 (<code>SECTION</code>).</p>
 <p>To continue the cake-baking analogy even further, instructions are like steps in a recipe.
 The console’s processor (<abbr title="Central Processing Unit">CPU</abbr>) executes instructions one at a time, and that… eventually does something!
 Like baking a cake, drawing a “Hello World” image, or displaying a Game Boy programming tutorial!
