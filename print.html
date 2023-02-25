@@ -14,7 +14,6 @@
         <meta property="og:image" content="https://eldred.fr/gb-asm-tutorial/assets/banner/1200x628.png" />
         <meta property="og:site_name" content="GB ASM Tutorial"/>
 
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A complete guide to programming Game Boy games in assembly.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -39,14 +38,15 @@
 
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -62,7 +62,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -74,7 +74,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -105,7 +105,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -141,7 +141,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -1104,7 +1104,7 @@ We can fix that in the options, which we can access by either:</p>
 <ul>
 <li>Right-clicking the screen and selecting “Options”</li>
 <li>In the debugger, open the “Window” menu, and select “Options”</li>
-<li>Press <kbd>F11</kbd> while focusing either the screen or debugger</li>
+<li>Press <kbd><kbd>F11</kbd></kbd> while focusing either the screen or debugger</li>
 </ul>
 <p>BGB has a <em>ton</em> of options, but don’t worry, it’s got good defaults, so we don’t need to look at most of them for now.
 Select the “Debug” tab, and set “Disasm syntax” to “rgbds”.
@@ -1134,7 +1134,7 @@ When looking for a ROM’s sym file, BGB takes the ROM’s file name, strips the
 <div class="box tip decorated">
 <div><p>🔍</p></div>
 <div>
-<p>If a sym file is loaded, pressing <kbd>Tab</kbd> allows toggling whether labels are displayed or not.</p>
+<p>If a sym file is loaded, pressing <kbd><kbd>Tab</kbd></kbd> allows toggling whether labels are displayed or not.</p>
 </div>
 </div>
 <h2 id="stepping"><a class="header" href="#stepping">Stepping</a></h2>
@@ -1147,7 +1147,7 @@ When looking for a ROM’s sym file, BGB takes the ROM’s file name, strips the
 </div>
 </div>
 <p>If we want to watch execution from the beginning, we need to reset the emulator.
-Go into the debugger’s “Run” menu, and select “Reset”, or tap your numpad’s <kbd>*</kbd> key.</p>
+Go into the debugger’s “Run” menu, and select “Reset”, or tap your numpad’s <kbd><kbd>*</kbd></kbd> key.</p>
 <p>The blue line should automatically move to address $0100<sup class="footnote-reference"><a href="#boot_addr">1</a></sup>, and now we’re ready to trace!
 All the commands for that are in the “Run” menu.</p>
 <ul>
@@ -1157,7 +1157,7 @@ They only really differ on the <code>call</code> instruction and interrupts, nei
 <li>The other options are not relevant for now.</li>
 </ul>
 <p>We will have to “Trace” a bunch of times, so it’s a good idea to use the key shortcut.
-If we press <kbd>F7</kbd> once, the <code>jp EntryPoint</code> is executed.
+If we press <kbd><kbd>F7</kbd></kbd> once, the <code>jp EntryPoint</code> is executed.
 And if we press it a few more times, can see the instructions being executed, one by one!</p>
 <video controls poster="../assets/vid/reset_trace.poster.png">
   <source src="../assets/vid/reset_trace.webm" type="video/webm">
@@ -1166,10 +1166,10 @@ And if we press it a few more times, can see the instructions being executed, on
 </video>
 <p>Now, you may notice the <code>WaitVBlank</code> loop runs a <em>lot</em> of times, but what we are interested in is the <code>CopyTiles</code> loop.
 We can easily skip over it in several ways; this time, we will use a <em>breakpoint</em>.
-We will place the breakpoint on the <code>ld de, Tiles</code> at <code>00:0162</code>; either double-click on that line, or select it and press <kbd>F2</kbd>.
+We will place the breakpoint on the <code>ld de, Tiles</code> at <code>00:0162</code>; either double-click on that line, or select it and press <kbd><kbd>F2</kbd></kbd>.
 The line will turn red:</p>
 <p><img src="part1/../assets/img/breakpoint.png" alt="Debugger screenshot showcasing the breakpoint" /></p>
-<p>Then you can resume execution either by clicking the screen or pressing <kbd>F9</kbd>, and BGB will automatically pause.
+<p>Then you can resume execution either by clicking the screen or pressing <kbd><kbd>F9</kbd></kbd>, and BGB will automatically pause.
 Whenever BGB is running, and the (emulated) CPU is about to execute an instruction a breakpoint was placed on, it automatically pauses.</p>
 <p><img src="part1/../assets/img/bkpt_pause.png" alt="Debugger screenshot showcasing execution paused on the breakpoint" /></p>
 <p>You can see where execution is being paused both from the green arrow and the value of PC.</p>
@@ -1178,7 +1178,7 @@ Whenever BGB is running, and the (emulated) CPU is about to execute an instructi
 <p>For fun, let’s watch the tiles as they’re being copied.
 For that, obviously, we will use the data viewer, and position it at the destination.
 As we can see from the image above, that would be $9000!</p>
-<p>Select the data viewer (either click somewhere in it, or use <kbd>Ctrl</kbd>+<kbd>Tab</kbd> to switch focus, as indicated by the grey bar on the left), and press Ctrl+G (for “Goto”).
+<p>Select the data viewer (either click somewhere in it, or use <kbd><kbd>Ctrl</kbd>+<kbd>Tab</kbd></kbd> to switch focus, as indicated by the grey bar on the left), and press Ctrl+G (for “Goto”).
 In the popup, type the address you wish to go to, in our case <code>9000</code> (sans dollar sign!!).</p>
 <video controls poster="../assets/vid/trace_copy.poster.png">
   <source src="../assets/vid/trace_copy.webm" type="video/webm">
@@ -1298,7 +1298,7 @@ And, even better, the Game Boy Color will automatically colorize games that lack
 <h2 id="getting-our-hands-dirty"><a class="header" href="#getting-our-hands-dirty">Getting our hands dirty</a></h2>
 <p>Well, so far in this tutorial, besides running the Hello World, we have been pretty passive, watching it unfold.
 What do you say we start prodding the ROM a bit?</p>
-<p>In BGB’s debugger, select the “Window” menu, and open the “IO map” (or just press <kbd>F10</kbd> within the debugger).</p>
+<p>In BGB’s debugger, select the “Window” menu, and open the “IO map” (or just press <kbd><kbd>F10</kbd></kbd> within the debugger).</p>
 <p><img src="part1/../assets/img/io_map.png" alt="Screenshot of the IO map" /></p>
 <p>While the VRAM viewer offers a visual representation of the palette, the IO map shows the nitty-gritty: how it’s encoded.
 The IO map also lets us modify BGP easily; but to do so, we need to understand <em>how</em> values we write are turned into colors.</p>
@@ -2405,27 +2405,28 @@ It’s a good idea to consult it if you aare unsure how a register works, or if 
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="js/linenos.js"></script>
+        <script src="js/linenos.js"></script>
 
-        <script type="text/javascript">
+        <script>
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);
         });
         </script>
 
+    </div>
     </body>
 </html>
