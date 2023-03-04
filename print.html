@@ -185,7 +185,7 @@ If you are looking to program GBC games and run them on a GBA, you’re at the r
 <ul>
 <li>All the code contained within the tutorial itself is licensed under <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">CC0</a>. <em>To the extent possible under law, all copyright and related or neighboring rights to code presented within GB ASM Tutorial have been waived. This work is published from France.</em></li>
 <li>The contents (prose, images, etc.) of this tutorial are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</li>
-<li>Code used to display and format the site is licensed under the <a href="https://github.com/ISSOtm/gb-asm-tutorial/blob/master/LICENSE">MIT License</a> unless otherwise specified.</li>
+<li>Code used to display and format the site is licensed under the <a href="https://github.com/gbdev/gb-asm-tutorial/blob/master/LICENSE">MIT License</a> unless otherwise specified.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="roadmap"><a class="header" href="#roadmap">Roadmap</a></h1>
 <p>The tutorial is split into three sections.
@@ -209,7 +209,7 @@ I actively participate there, and don’t be afraid to ask questions!
 <p>If you are interested in contributing to or translating the tutorial, thank you!
 Follow the link above, I’d be happy to work with you.</p>
 <p>Noticed a problem with the tutorial?
-Please <a href="https://github.com/ISSOtm/gb-asm-tutorial/issues">check out our issue tracker</a>; if there is no open issue about your problem, please create a new one, or reach out to us via the link above.</p>
+Please <a href="https://github.com/gbdev/gb-asm-tutorial/issues">check out our issue tracker</a>; if there is no open issue about your problem, please create a new one, or reach out to us via the link above.</p>
 <p>If you prefer email, my address is <code>tutorial@&lt;domain&gt;</code>, where you replace <code>&lt;domain&gt;</code> with this website’s domain name (it ends with <code>.fr</code>).
 Anti-spam measure, I hope you understand.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="setup"><a class="header" href="#setup">Setup</a></h1>
@@ -1545,8 +1545,8 @@ For example, <code>rgbasm -g '.xXO' (...)</code> or <code>OPT g.xXO</code> would
 <pre><code class="language-rgbasm">	dw `01230123 ; This is equivalent to `db $55,$33`
 </code></pre>
 <p>You may have noticed that we are using <code>dw</code> instead of <code>db</code>; the difference between these two will be explained later.
-We already have tiles made for this project, so you can copy <a href="https://github.com/ISSOtm/gb-asm-tutorial/raw/master/unbricked/getting-started/tileset.asm">this premade file</a>, and paste it at the end of your code.</p>
-<p>Then copy the tilemap from <a href="https://github.com/ISSOtm/gb-asm-tutorial/raw/master/unbricked/getting-started/tilemap.asm">this file</a>, and paste it after the <code>TilesEnd</code> label.</p>
+We already have tiles made for this project, so you can copy <a href="https://github.com/gbdev/gb-asm-tutorial/raw/master/unbricked/getting-started/tileset.asm">this premade file</a>, and paste it at the end of your code.</p>
+<p>Then copy the tilemap from <a href="https://github.com/gbdev/gb-asm-tutorial/raw/master/unbricked/getting-started/tilemap.asm">this file</a>, and paste it after the <code>TilesEnd</code> label.</p>
 <p>You can build the ROM now, by running the following commands in your terminal:</p>
 <pre><code><span class="console-line hljs-meta"></span><span class="language-bash">rgbasm -L -o main.o main.asm</span>
 <span class="console-line hljs-meta"></span><span class="language-bash">rgblink -o unbricked.gb main.o</span>
@@ -1569,17 +1569,17 @@ You can use one of the following pre-made logos, or try coming up with your own!
 <li>
 <p><strong>RGBDS Logo</strong></p>
 <p><img src="part2/../assets/part2/img/rgbds.png" alt="The RGBDS Logo" /></p>
-<p><a href="https://github.com/ISSOtm/gb-asm-tutorial/raw/master/unbricked/getting-started/rgbds.asm">Source</a></p>
+<p><a href="https://github.com/gbdev/gb-asm-tutorial/raw/master/unbricked/getting-started/rgbds.asm">Source</a></p>
 </li>
 <li>
 <p><strong>Duck</strong></p>
 <p><img src="part2/../assets/part2/img/duck.png" alt="A pixel-art duck" /></p>
-<p><a href="https://github.com/ISSOtm/gb-asm-tutorial/raw/master/unbricked/getting-started/duck.asm">Source</a></p>
+<p><a href="https://github.com/gbdev/gb-asm-tutorial/raw/master/unbricked/getting-started/duck.asm">Source</a></p>
 </li>
 <li>
 <p><strong>Tail</strong></p>
 <p><img src="part2/../assets/part2/img/tail.png" alt="A silhouette of a tail" /></p>
-<p><a href="https://github.com/ISSOtm/gb-asm-tutorial/raw/master/unbricked/getting-started/tail.asm">Source</a></p>
+<p><a href="https://github.com/gbdev/gb-asm-tutorial/raw/master/unbricked/getting-started/tail.asm">Source</a></p>
 </li>
 </ul>
 <p>Add your chosen logo’s data (click one of the “Source” links above) after the comment, build the game again, and you should see your logo of choice in the bottom-right!</p>
