@@ -3,12 +3,12 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Registers - GB ASM Tutorial</title>
+        <title>Registri - GB ASM Tutorial</title>
 
         <!-- Custom HTML head -->
         <meta name="twitter:card" content="summary_large_image"/>
         <meta name="twitter:site:id" content="@gbdev0"/>
-        <meta property="og:title" content="Registers - GB ASM Tutorial" />
+        <meta property="og:title" content="Registri - GB ASM Tutorial" />
         <meta property="og:image" content="https://gbdev.io/gb-asm-tutorial/assets/banner/1200x628.png" />
         <meta property="og:site_name" content="GB ASM Tutorial"/>
 
@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><a href="../index.html">Home</a></li><li class="chapter-item affix "><a href="../roadmap.html">Roadmap</a></li><li class="chapter-item affix "><a href="../help-feedback.html">Help and feedback</a></li><li class="chapter-item affix "><li class="part-title">Part Ⅰ — Hello World!</li><li class="chapter-item "><a href="../part1/setup.html"><strong aria-hidden="true">1.</strong> Setup</a></li><li class="chapter-item "><a href="../part1/hello_world.html"><strong aria-hidden="true">2.</strong> Hello World!</a></li><li class="chapter-item "><a href="../part1/toolchain.html"><strong aria-hidden="true">3.</strong> The toolchain</a></li><li class="chapter-item "><a href="../part1/bin_and_hex.html"><strong aria-hidden="true">4.</strong> Binary and hexadecimal</a></li><li class="chapter-item expanded "><a href="../part1/registers.html" class="active"><strong aria-hidden="true">5.</strong> Registers</a></li><li class="chapter-item "><a href="../part1/assembly.html"><strong aria-hidden="true">6.</strong> Assembly basics</a></li><li class="chapter-item "><a href="../part1/memory.html"><strong aria-hidden="true">7.</strong> Memoria</a></li><li class="chapter-item "><a href="../part1/header.html"><strong aria-hidden="true">8.</strong> The header</a></li><li class="chapter-item "><a href="../part1/operations.html"><strong aria-hidden="true">9.</strong> Operations & flags</a></li><li class="chapter-item "><a href="../part1/jumps.html"><strong aria-hidden="true">10.</strong> Jumps</a></li><li class="chapter-item "><a href="../part1/tracing.html"><strong aria-hidden="true">11.</strong> Tracing</a></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> Graphics</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part1/tiles.html"><strong aria-hidden="true">12.1.</strong> Tiles</a></li><li class="chapter-item "><a href="../part1/palettes.html"><strong aria-hidden="true">12.2.</strong> Palettes</a></li><li class="chapter-item "><a href="../part1/tilemap.html"><strong aria-hidden="true">12.3.</strong> Tilemap</a></li></ol></li><li class="chapter-item "><a href="../part1/wrapup.html"><strong aria-hidden="true">13.</strong> Wrapping up</a></li><li class="chapter-item affix "><li class="part-title">Part Ⅱ — Our first game</li><li class="chapter-item "><a href="../part2/getting-started.html"><strong aria-hidden="true">14.</strong> Getting started</a></li><li class="chapter-item "><a href="../part2/objects.html"><strong aria-hidden="true">15.</strong> Objects</a></li><li class="chapter-item "><a href="../part2/functions.html"><strong aria-hidden="true">16.</strong> Functions</a></li><li class="chapter-item "><a href="../part2/input.html"><strong aria-hidden="true">17.</strong> Input</a></li><li class="chapter-item "><a href="../part2/collision.html"><strong aria-hidden="true">18.</strong> Collision</a></li><li class="chapter-item "><a href="../part2/wip.html"><strong aria-hidden="true">19.</strong> Work in progress</a></li><li class="chapter-item affix "><li class="part-title">Part Ⅲ — Our second game</li><li class="chapter-item "><div><strong aria-hidden="true">20.</strong> To be written...</div></li><li class="spacer"></li><li class="chapter-item affix "><a href="../next.html">Where to go next</a></li><li class="chapter-item affix "><a href="../resources.html">Resources</a></li><li class="chapter-item affix "><a href="../thanks.html">Thanks</a></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><a href="../index.html">Home</a></li><li class="chapter-item affix "><a href="../roadmap.html">Tabella di marcia</a></li><li class="chapter-item affix "><a href="../help-feedback.html">Aiuto e Suggerimenti</a></li><li class="chapter-item affix "><li class="part-title">Parte Ⅰ - Hello World!</li><li class="chapter-item "><a href="../part1/setup.html"><strong aria-hidden="true">1.</strong> Configurazione</a></li><li class="chapter-item "><a href="../part1/hello_world.html"><strong aria-hidden="true">2.</strong> Hello World!</a></li><li class="chapter-item "><a href="../part1/toolchain.html"><strong aria-hidden="true">3.</strong> Strumenti di lavoro</a></li><li class="chapter-item "><a href="../part1/bin_and_hex.html"><strong aria-hidden="true">4.</strong> Binario ed esadecimale</a></li><li class="chapter-item expanded "><a href="../part1/registers.html" class="active"><strong aria-hidden="true">5.</strong> Registri</a></li><li class="chapter-item "><a href="../part1/assembly.html"><strong aria-hidden="true">6.</strong> Basi di Assembly</a></li><li class="chapter-item "><a href="../part1/memory.html"><strong aria-hidden="true">7.</strong> Memoria</a></li><li class="chapter-item "><a href="../part1/header.html"><strong aria-hidden="true">8.</strong> The header</a></li><li class="chapter-item "><a href="../part1/operations.html"><strong aria-hidden="true">9.</strong> Operazioni e flags</a></li><li class="chapter-item "><a href="../part1/jumps.html"><strong aria-hidden="true">10.</strong> Jumps</a></li><li class="chapter-item "><a href="../part1/tracing.html"><strong aria-hidden="true">11.</strong> Tracing</a></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> Grafica</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part1/tiles.html"><strong aria-hidden="true">12.1.</strong> Tiles</a></li><li class="chapter-item "><a href="../part1/palettes.html"><strong aria-hidden="true">12.2.</strong> Palette</a></li><li class="chapter-item "><a href="../part1/tilemap.html"><strong aria-hidden="true">12.3.</strong> Tilemap</a></li></ol></li><li class="chapter-item "><a href="../part1/wrapup.html"><strong aria-hidden="true">13.</strong> In conclusione</a></li><li class="chapter-item affix "><li class="part-title">Parte Ⅱ - Il nostro primo gioco</li><li class="chapter-item "><a href="../part2/getting-started.html"><strong aria-hidden="true">14.</strong> Per iniziare</a></li><li class="chapter-item "><a href="../part2/objects.html"><strong aria-hidden="true">15.</strong> Oggetti</a></li><li class="chapter-item "><a href="../part2/functions.html"><strong aria-hidden="true">16.</strong> Funzioni</a></li><li class="chapter-item "><a href="../part2/input.html"><strong aria-hidden="true">17.</strong> Input</a></li><li class="chapter-item "><a href="../part2/collision.html"><strong aria-hidden="true">18.</strong> Collisioni</a></li><li class="chapter-item "><a href="../part2/wip.html"><strong aria-hidden="true">19.</strong> Lavori in corso</a></li><li class="chapter-item affix "><li class="part-title">Parte Ⅲ - Il nostro secondo gioco</li><li class="chapter-item "><div><strong aria-hidden="true">20.</strong> Da scrivere...</div></li><li class="spacer"></li><li class="chapter-item affix "><a href="../next.html">Prossimi passi</a></li><li class="chapter-item affix "><a href="../resources.html">Risorse</a></li><li class="chapter-item affix "><a href="../thanks.html">Ringraziamenti</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -193,59 +193,59 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="registers"><a class="header" href="#registers">Registers</a></h1>
-<p>Alright!
-Now that we know what bits are, let’s talk about how they’re used.
-Don’t worry, this is mostly prep work for the next section, where we will—finally!—look at the code 👀</p>
-<p>First, if you opened BGB, you have been greeted with just the Game Boy screen.
-So, it’s time we pop the debugger open!
-Right-click the screen, select “Other”, and click “Debugger”.
-Oh, and while we’re at this, we might as well increase the screen size a little.</p>
+                        <h1 id="registri"><a class="header" href="#registri">Registri</a></h1>
+<p>Bene!
+Ora che sappiamo cosa sono i bit, parliamo di come vengono utilizzati.
+Non preoccupatevi, si tratta per lo più di un lavoro di preparazione per la prossima sezione, in cui daremo finalmente uno sguardo al codice 👀</p>
+<p>Per prima cosa, se avete aperto BGB, siete stati accolti solo con la schermata del Game Boy.
+È ora di aprire il debugger!
+Fate clic con il tasto destro del mouse sullo schermo, selezionate “Altro” e fate clic su “Debugger”.
+Oh, e già che ci siamo, potremmo anche aumentare un po’ le dimensioni dello schermo.</p>
 <video controls poster="../assets/vid/debugger.poster.png">
 	<source src="../assets/vid/debugger.webm" type="video/webm">
 	<source src="../assets/vid/debugger.mp4" type="video/mp4">
 <pre><code>&lt;img src=&quot;../assets/vid/debugger.gif&quot; alt=&quot;Video demonstration in BGB&quot;&gt;
 </code></pre>
 </video>
-<p>The debugger may look intimidating at first, but don’t worry, soon we’ll be very familiar with it!
-For now, let’s focus on this small box near the top-right, the <em>register viewer</em>.</p>
-<p><img src="../assets/img/reg_viewer.png" alt="Picture of the register viewer’s location" /></p>
+<p>Il debugger può sembrare intimidatorio all’inizio, ma non preoccupatevi, presto avremo molta familiarità con esso!
+Per ora, concentriamoci su questo piccolo riquadro in alto a destra, il <em>register viewer</em>.</p>
+<p><img src="../assets/img/reg_viewer.png" alt="Immagine della posizione del visualizzatore di registri" /></p>
 <div class="box warning decorated">
 <div><p>⚠️</p></div>
 <div>
-<p>The register viewer shows both <em>CPU registers</em> and some <em>hardware registers</em>.
-This lesson will only deal with CPU registers, so that’s why we will be ignoring some of these entries here.</p>
+<p>Il visualizzatore di registri mostra sia i registri della CPU che alcuni registri dell’hardware.
+In questa lezione ci occuperemo solo dei registri della CPU, per cui ignoreremo alcune di queste voci.</p>
 </div>
 </div>
-<p>What are CPU registers?
-Well, imagine you’re preparing a cake.
-You will be following a recipe, whose instructions may be “melt 125g of chocolate and 125g of butter, blend with 2 eggs” and so on.
-You will fetch some ingredients from the fridge as needed, but you don’t cook inside the fridge; for that, you have a small workspace.</p>
-<p>Registers are pretty much the CPU’s workspace.
-They are small, tiny chunks of memory embedded directly in the CPU (only 10 bytes for the Game Boy’s CPU, and even modern CPUs have less than a kilobyte if you don’t count <a href="https://en.wikipedia.org/wiki/SIMD"><abbr title="Single Instruction, Multiple Data">SIMD</abbr></a> registers).
-Operations are not performed directly on data stored in memory, which would be equivalent to breaking eggs directly inside our fridge, but they are performed on registers.</p>
+<p>Cosa sono i registri della CPU?
+Immaginate di preparare una torta.
+Seguirete una ricetta, le cui istruzioni possono essere “sciogliere 125 g di cioccolato e 125 g di burro, mescolare con 2 uova” e così via.
+Si prenderanno alcuni ingredienti dal frigorifero secondo le necessità, ma non si cucinerà all’interno del frigorifero; per questo, si dispone di un piccolo spazio di lavoro.</p>
+<p>I registri sono praticamente lo spazio di lavoro della CPU.
+Sono piccoli, minuscoli pezzi di memoria incorporati direttamente nella CPU (solo 10 byte per la CPU del Game Boy, e anche le CPU moderne hanno meno di un kilobyte se non si contano i registri <a href="https://en.wikipedia.org/wiki/SIMD"><abbr title="Single Instruction, Multiple Data">SIMD</abbr></a> ).
+Le operazioni non vengono eseguite direttamente sui dati memorizzati, il che equivarrebbe a rompere le uova direttamente nel nostro frigorifero, ma vengono eseguite sui registri.</p>
 <div class="box tip decorated">
 <div><p>ℹ️</p></div>
 <div>
-<p>There are exceptions to this rule, like many other “rules” I will give in this tutorial; I will paper over them to keep the mental complexity reasonable, but don’t treat my word as gospel either.</p>
+<p>Ci sono eccezioni a questa regola, come a molte altre “regole” che fornirò in questo tutorial; ne parlerò per mantenere la complessità mentale ragionevole, ma non considerate la mia parola come vangelo.</p>
 </div>
 </div>
-<h2 id="general-purpose-registers"><a class="header" href="#general-purpose-registers">General-purpose registers</a></h2>
-<p>CPU registers can be placed into two categories: <em>general-purpose</em> and <em>special-purpose</em>.
-A “general-purpose” register (<abbr title="General-Purpose Register">GPR</abbr> for short) can be used for storing arbitrary integer numbers.
-Some GPRs are special nonetheless, as we will see later; but the distinction is “can I store arbitrary integers in it?”.</p>
-<p>I won’t introduce special-purpose registers quite yet, as their purpose wouldn’t make sense yet.
-Rather, they will be discussed as the relevant concepts are introduced.</p>
-<p>The Game Boy CPU has seven 8-bit GPRs: <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>, <code>e</code>, <code>h</code>, and <code>l</code>.
-“8-bit” means that, well, they store 8 bits.
-Thus, they can store integers from 0 to 255 (%1111_1111 aka $FF).</p>
-<p><code>a</code> is the <em>accumulator</em>, and we will see later that it can be used in special ways.</p>
-<p>A special feature is that these registers, besides <code>a</code>, are <em>paired up</em>, and the pairs can be treated as the 16-bit registers <code>bc</code>, <code>de</code>, and <code>hl</code>.
-The pairs are <em>not</em> separate from the individual registers; for example, if <code>d</code> contains 192 ($C0) and <code>e</code> contains 222 ($DE), then <code>de</code> contains 49374 ($C0DE) = 192 × 256 + 222.
-The other pairs work similarly.</p>
-<p>Modifying <code>de</code> actually modifies both <code>d</code> and <code>e</code> at the same time, and modifying either individually also affects the pair.
-How do we modify registers?
-Let’s see how, with our first assembly instructions!</p>
+<h2 id="registri-di-uso-generale"><a class="header" href="#registri-di-uso-generale">Registri di uso generale</a></h2>
+<p>I registri della CPU possono essere suddivisi in due categorie: <em>general-purpose</em> e <em>special-purpose</em>.
+Un registro “general-purpose” (in breve<abbr title="General-Purpose Register">GPR</abbr> ) può essere utilizzato per memorizzare numeri interi arbitrari.
+Alcuni GPR sono comunque speciali, come vedremo in seguito; ma la distinzione è “posso memorizzarvi numeri interi arbitrari?”.</p>
+<p>Non presenterò ancora i registri speciali, perché il loro scopo non avrebbe ancora senso.
+Verranno invece discussi man mano che verranno introdotti i concetti pertinenti.</p>
+<p>La CPU del Game Boy ha sette GPR a 8 bit: <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>, <code>e</code>, <code>h</code> e <code>l</code>.
+“8 bit” significa che memorizzano 8 bit.
+Pertanto, possono memorizzare numeri interi da 0 a 255 (%1111_1111 alias $FF).</p>
+<p>`a’ è l’<em>accumulatore</em>, e vedremo più avanti che può essere usato in modi speciali.</p>
+<p>Una caratteristica particolare è che questi registri, oltre ad <code>a</code>, sono <em>accoppiati</em>, e le coppie possono essere trattate come i registri a 16 bit <code>bc</code>, <code>de</code> e <code>hl</code>.
+Le coppie non sono <em>separate</em> dai singoli registri; per esempio, se <code>d</code> contiene 192 ($C0) ed <code>e</code> contiene 222 ($DE), allora <code>de</code> contiene 49374 ($C0DE) = 192 × 256 + 222.
+Le altre coppie funzionano in modo simile.</p>
+<p>La modifica di <code>de</code> modifica in realtà sia <code>d</code> che <code>e</code> allo stesso tempo, e la modifica di uno dei due singolarmente influisce anche sulla coppia.
+Come si modificano i registri?
+Vediamo come, con le nostre prime istruzioni di assemblaggio!</p>
 
                     </main>
 
