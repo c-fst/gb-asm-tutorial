@@ -203,48 +203,18 @@ In alto a sinistra c’è il visualizzatore del codice, in basso a sinistra c’
 Che cos’è lo stack?
 Risponderemo a questa domanda un po’ più tardi… nella Parte Ⅱ 😅</p>
 <h2 id="impostazione"><a class="header" href="#impostazione">Impostazione</a></h2>
-<p>Per ora concentriamoci sul visualizzatore di codice.
-Se si mette a fuoco il debugger mentre l’emulatore è in esecuzione, questo viene messo in pausa, come indicato dal titolo della finestra dello schermo che cambia in <code>bgb (debug)</code>.</p>
-<p>Ok, ma perché questa strana sintassi?
-Esistono diverse sintassi per l’assemblaggio del Game Boy e BGB non usa RGBDS’ per impostazione predefinita.
-Possiamo risolvere il problema nelle opzioni, a cui si può accedere:</p>
-<ul>
-<li>Cliccando con il tasto destro del mouse sullo schermo e selezionando “Opzioni”</li>
-<li>Nel debugger, aprire il menu “Finestra” e selezionare “Opzioni”</li>
-<li>Premere <kbd><kbd>F11</kbd></kbd> mentre si mette a fuoco lo schermo o il debugger</li>
-</ul>
-<p>BGB ha una <em>tonnellata</em> di opzioni, ma non preoccupatevi, ha delle buone impostazioni predefinite, quindi non è necessario esaminarne la maggior parte per ora.
-Selezionate la scheda “Debug” e impostate “Disasm syntax” su “rgbds”.
-E spuntate anche la casella “Simboli locali”.
-Ora fate clic su “OK” per applicare le opzioni.</p>
-<p><img src="../assets/img/options.png" alt="Schermata della finestra delle opzioni" /></p>
-<div class="box warning">
-<p>Nelle opzioni è possibile personalizzare molti collegamenti ai tasti, ma in questo tutorial mi atterrò a quelli predefiniti per semplicità.</p>
-</div>
-<p>D’accordo, fantastico!
-Ma dove sono le etichette?
-Come abbiamo visto un paio di lezioni fa, le etichette sono solo una comodità fornita da RGBASM, ma non fanno parte della ROM stessa.
-È molto scomodo eseguire il debug senza di esse, quindi sono stati sviluppati i file sym (per “<strong>sym</strong>bols”).
-Eseguiamo RGBLINK per generare un file sym per la nostra ROM:</p>
+<p>For now, let’s focus on the code viewer.</p>
+<p>As Emulicious can load our source code, our code’s labels and comments are automatically shown in the debugger.
+As we have seen a couple of lessons ago, labels are merely a convenience provided by RGBASM, but they are not part of the ROM itself.
+In other emulators, it is very much inconvenient to debug without them, and so sym files (for “<strong>sym</strong>bols”) have been developed.
+Let’s run RGBLINK to generate a sym file for our ROM:</p>
 <p>``console
 $ rgblink -n hello-world.sym hello-world.o</p>
 <pre><code>
 ::: warning:‼️
 
-I nomi dei file sono importanti!
-Quando si cerca il file sym di una ROM, BGB prende il nome del file della ROM, elimina l'estensione (in questo caso, `.gb`), la sostituisce con `.sym` e cerca un file **nella stessa directory** con quel nome.
-
-:::
-
-Quindi, nel debugger, possiamo andare nel menu &quot;File&quot; e selezionare &quot;ricarica file SYM&quot;.
-
-![Schermata del debugger che mostra le etichette nel visualizzatore di codice](../assets/img/labels.png)
-
-Molto meglio!
-
-::: tip:🔍
-
-Se è stato caricato un file sym, premendo &lt;kbd&gt;&lt;kbd&gt;Tab&lt;/kbd&gt;&lt;/kbd&gt; si può scegliere se visualizzare o meno le etichette.
+The file names matter!
+When looking for a ROM's sym file, emulators take the ROM's file name, strip the extension (here, `.gb`), replace it with `.sym`, and look for a file **in the same directory** with that name.
 
 :::
 
@@ -255,41 +225,40 @@ Quando si mette in pausa l'esecuzione, il debugger si concentra automaticamente 
 
 ::: tip:ℹ️
 
-L'istruzione evidenziata in blu è sempre quella che la CPU sta per eseguire, non quella che ha appena eseguito. Tenetelo a mente.
+The instruction highlighted in blue is always what the CPU is _about to execute_, not what it _just executed_. Keep this in mind.
 
 :::
 
-Se si desidera osservare l'esecuzione dall'inizio, è necessario resettare l'emulatore.
-Accedere al menu &quot;Esegui&quot; del debugger e selezionare &quot;Reset&quot;, oppure toccare il tasto &lt;kbd&gt;&lt;kbd&gt;\*&lt;/kbd&gt;&lt;/kbd&gt; del tastierino numerico.
+If we want to watch execution from the beginning, we need to reset the emulator.
+Go into the emulator's &quot;File&quot; menu, and select &quot;Reset&quot;, or press &lt;kbd&gt;&lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Backspace&lt;/kbd&gt;&lt;/kbd&gt;.
 
 La linea blu dovrebbe spostarsi automaticamente all'indirizzo $0100[^boot_addr] e ora siamo pronti a tracciare!
 Tutti i comandi per farlo si trovano nel menu &quot;Esegui&quot;.
 
-- &quot;Esegui&quot; semplicemente disattiva l'emulatore. Anche facendo clic sullo schermo si ottiene lo stesso risultato.
-- &quot;Trace&quot; (più comunemente noto come &quot;Step Into&quot;) e &quot;Step Over&quot; fanno avanzare l'emulatore di un'istruzione.
-Si differenziano solo per l'istruzione `call` e per gli interrupt, che non utilizzeremo in questo caso, quindi useremo &quot;Trace&quot;.
-- Le altre opzioni non sono rilevanti per ora.
+- &quot;Resume&quot; simply unpauses the emulator.
+- &quot;Step Into&quot; and &quot;Step Over&quot; advance the emulator by one instruction.
+  They only really differ on the `call` instruction, interrupts, and when encountering a conditional jump, neither of which we are using here, so we will use &quot;Step Into&quot;.
+- The other options are not relevant for now.
 
-Dovremo &quot;Tracciare&quot; un sacco di volte, quindi è una buona idea usare la scorciatoia da tastiera.
-Se premiamo una volta &lt;kbd&gt;&lt;kbd&gt;F7&lt;/kbd&gt;&lt;/kbd&gt; , viene eseguito il `jp EntryPoint'.
-E se lo premiamo altre volte, possiamo vedere l'esecuzione delle istruzioni, una per una!
+We will have to &quot;Step Into&quot; a bunch of times, so it's a good idea to use the key shortcut.
+If we press &lt;kbd&gt;&lt;kbd&gt;F5&lt;/kbd&gt;&lt;/kbd&gt; once, the `jp EntryPoint` is executed.
+And if we press it a few more times, can see the instructions being executed, one by one!
 
 &lt;video controls poster=&quot;../assets/vid/reset_trace.poster.png&quot;&gt;
   &lt;source src=&quot;../assets/vid/reset_trace.webm&quot; type=&quot;video/webm&quot;&gt;
   &lt;source src=&quot;../assets/vid/reset_trace.mp4&quot; type=&quot;video/mp4&quot;&gt;
 
-  &lt;img src=&quot;../assets/vid/reset_trace.gif&quot; alt=&quot;Video demonstration in BGB&quot;&gt;
+  &lt;img src=&quot;../assets/vid/reset_trace.gif&quot; alt=&quot;Video demonstration in Emulicious&quot;&gt;
 &lt;/video&gt;
 
-Ora, si può notare che il ciclo `WaitVBlank` viene eseguito *molte* volte, ma ciò che ci interessa è il ciclo `CopyTiles`.
-Possiamo facilmente saltarlo in diversi modi; questa volta useremo un *breakpoint*.
-Posizioneremo il punto di interruzione su `ld de, Tiles` a `00:0162`; fate doppio clic su quella riga, oppure selezionatela e premete &lt;kbd&gt;&lt;kbd&gt;F2&lt;/kbd&gt;&lt;/kbd&gt;.
-La riga diventerà rossa:
+Now, you may notice the `WaitVBlank` loop runs a _lot_ of times, but what we are interested in is the `CopyTiles` loop.
+We can easily skip over it in several ways; this time, we will use a _breakpoint_.
+We will place the breakpoint on the `ld de, Tiles` at `00:0162`; either double-click on that line, or select it and press &lt;kbd&gt;&lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;B&lt;/kbd&gt;&lt;/kbd&gt;.
 
 ![Schermata del debugger che mostra il punto di interruzione](../assets/img/breakpoint.png)
 
-Quindi è possibile riprendere l'esecuzione facendo clic sullo schermo o premendo &lt;kbd&gt;&lt;kbd&gt;F9&lt;/kbd&gt;&lt;/kbd&gt;, e BGB si metterà automaticamente in pausa.
-Ogni volta che BGB è in esecuzione e la CPU (emulata) sta per eseguire un'istruzione su cui è stato posizionato un breakpoint, si mette automaticamente in pausa.
+Then you can resume execution by pressing &lt;kbd&gt;&lt;kbd&gt;F8&lt;/kbd&gt;&lt;/kbd&gt;.
+Whenever Emulicious is running, and the (emulated) CPU is about to execute an instruction a breakpoint was placed on, it automatically pauses.
 
 ![Schermata del debugger che mostra l'esecuzione in pausa sul punto di interruzione](../assets/img/bkpt_pause.png)
 
@@ -299,33 +268,33 @@ Se tracciamo le tre istruzioni successive, possiamo vedere che i tre argomenti d
 
 ![Lo stato di alcuni registri all'inizio del ciclo CopyTiles](../assets/img/regs_copytiles.png)
 
-Per divertimento, osserviamo le tessere mentre vengono copiate.
-Per questo, ovviamente, utilizzeremo il visualizzatore di dati e lo posizioneremo sulla destinazione.
-Come si può vedere dall'immagine qui sopra, si tratta di 9000 dollari!
+For fun, let's watch the tiles as they're being copied.
+For that, obviously, we will use the Memory Editor, and position it at the destination.
+As we can see from the image above, that would be $9000!
 
-Selezionate il visualizzatore di dati (fate clic da qualche parte o usate &lt;kbd&gt;&lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Tab&lt;/kbd&gt;&lt;/kbd&gt; per cambiare il focus, come indicato dalla barra grigia a sinistra) e premete Ctrl+G (per &quot;Goto&quot;).
-Nel popup, digitate l'indirizzo a cui volete andare, nel nostro caso `9000` (senza il segno del dollaro!!).
+Click on &quot;Memory&quot; on the bottom window, then &quot;VRAM&quot;, and press &lt;kbd&gt;&lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;G&lt;/kbd&gt;&lt;/kbd&gt; (for &quot;Goto&quot;).
 
 &lt;video controls poster=&quot;../assets/vid/trace_copy.poster.png&quot;&gt;
   &lt;source src=&quot;../assets/vid/trace_copy.webm&quot; type=&quot;video/webm&quot;&gt;
   &lt;source src=&quot;../assets/vid/trace_copy.mp4&quot; type=&quot;video/mp4&quot;&gt;
 
-  &lt;img src=&quot;../assets/vid/trace_copy.gif&quot; alt=&quot;Video demonstration in BGB&quot;&gt;
+  &lt;img src=&quot;../assets/vid/trace_copy.gif&quot; alt=&quot;Video demonstration in Emulicious&quot;&gt;
 &lt;/video&gt;
 
 Fantastico, vero?
 
 ## E poi?
 
-Congratulazioni, avete appena imparato a usare un debugger!
-Abbiamo però solo scalfito la superficie; utilizzeremo altri strumenti di BGB per illustrare le prossime parti.
-Non preoccupatevi, da qui in poi le lezioni saranno accompagnate da molte più immagini: avete superato la parte più difficile!
+Congrats, you have just learned how to use a debugger!
+We have only scratched the surface, though; we will use more of Emulicious' tools to illustrate the next parts.
+Don't worry, from here on, lessons will go with a lot more images—you've made it through the hardest part!
 
 ---
 
 [^boot_addr]:
-Perché l'esecuzione inizia da $0100?
-Perché è il punto in cui la [ROM di avvio](https://gbdev.io/pandocs/Power_Up_Sequence) cede il controllo al nostro gioco una volta terminato.
+
+Why does execution start at $0100?
+That's because it's where the [boot ROM](https://gbdev.io/pandocs/Power_Up_Sequence) hands off control to our game once it's done.
 </code></pre>
 
                     </main>

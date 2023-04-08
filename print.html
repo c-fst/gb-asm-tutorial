@@ -309,9 +309,9 @@ Using a bad emulator for playing games can work (to some extent, and even then�
 For more info, read <a href="https://arstechnica.com/?post_type=post&amp;p=44524">this article on Ars Technica</a> (especially the <q>An emulator for every game</q> section at the top of page 2).
 You can compare GB emulator accuracy on <a href="https://daid.github.io/GBEmulatorShootout/">Daid’s GB-emulator-shootout</a>.</li>
 </ul>
-<p>The emulator I will be using for this tutorial is <a href="https://bgb.bircd.org">BGB</a> (1.5.9 when I’m writing this).
-It’s Windows-only, but macOS and Linux users can install Wine to be able to run it, and macOS users will additionally have to use the 64-bit version.
-Other debugging emulators are possible (such as SameBoy on macOS), but I will be giving directives for and including screenshots of BGB.</p>
+<p>The emulator I will be using for this tutorial is <a href="https://emulicious.net/">Emulicious</a>.
+Users on all OSes can install the Java runtime to be able to run it.
+Other debugging emulators are available, such as <a href="https://www.mesen.ca/">Mesen2</a>, <a href="https://bgb.bircd.org">BGB</a> (Windows/Wine only), <a href="https://sameboy.github.io">SameBoy</a> (graphical interface on macOS only); they should have similar capabilities, but accessed through different menu options.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hello-world"><a class="header" href="#hello-world">Hello World!</a></h1>
 <p>In this lesson, we will begin by assembling our first program.
 The rest of this chapter will be dedicated to explaining how and why it works.</p>
@@ -359,20 +359,13 @@ It’s a good idea to create a new directory (<code>mkdir gb_hello_world</code>,
 <p>(If you encounter an error you can’t figure out by yourself, don’t be afraid to <a href="part1/../index.html#feedback">ask us</a>! We’ll sort it out.)</p>
 <p>Congrats!
 You just assembled your first Game Boy ROM!
-Now, we just need to run it; open BGB, right-click the window that opened, and load <code>hello-world.gb</code>.</p>
+Now, we just need to run it; open Emulicious, then go “File”, then “Open File”, and load <code>hello-world.gb</code>.</p>
 <video controls poster="../assets/vid/hello_world.poster.png">
 	<source src="../assets/vid/hello_world.webm" type="video/webm">
 	<source src="../assets/vid/hello_world.mp4" type="video/mp4">
-<pre><code>&lt;img src=&quot;../assets/vid/hello_world.gif&quot; alt=&quot;Video demonstration in BGB&quot;&gt;
+<pre><code>&lt;img src=&quot;../assets/vid/hello_world.gif&quot; alt=&quot;Video demonstration in Emulicious&quot;&gt;
 </code></pre>
 </video>
-<div class="box danger decorated">
-<div><p>🤕</p></div>
-<div>
-<p>If you are using Wine and BGB is failing to start (or gives a blank/black screen), <a href="https://eldred.fr/bgb#getting-started-on-wine">try these troubleshooting tips</a>.</p>
-<p>And in any case, don’t hesitate to ask for help!</p>
-</div>
-</div>
 <p>You could also take a flash cart (I use the <a href="https://krikzz.com/store/home/47-everdrive-gb.html">EverDrive GB X5</a>, but there are plenty of alternatives), load up your ROM onto it, and run it on an actual console!</p>
 <p><img src="part1/../assets/img/hello_dmg.jpg" alt="Picture of the Hello World running on a physical DMG" /></p>
 <p>Well, now that we have something working, it’s time to peel back the curtains…</p>
@@ -523,14 +516,14 @@ And, don’t worry, decimal can still be used 😜</p>
 <p>Alright!
 Now that we know what bits are, let’s talk about how they’re used.
 Don’t worry, this is mostly prep work for the next section, where we will—finally!—look at the code 👀</p>
-<p>First, if you opened BGB, you have been greeted with just the Game Boy screen.
+<p>First, if you opened Emulicious, you have been greeted with just the Game Boy screen.
 So, it’s time we pop the debugger open!
-Right-click the screen, select “Other”, and click “Debugger”.
-Oh, and while we’re at this, we might as well increase the screen size a little.</p>
+Go to “Tools”, then click “Debugger”, or press <kbd><kbd>F1</kbd></kbd>.
+Then in the debugger’s menu, click “View”, then click “Show Addresses”</p>
 <video controls poster="../assets/vid/debugger.poster.png">
 	<source src="../assets/vid/debugger.webm" type="video/webm">
 	<source src="../assets/vid/debugger.mp4" type="video/mp4">
-<pre><code>&lt;img src=&quot;../assets/vid/debugger.gif&quot; alt=&quot;Video demonstration in BGB&quot;&gt;
+<pre><code>&lt;img src=&quot;../assets/vid/debugger.gif&quot; alt=&quot;Video demonstration in Emulicious&quot;&gt;
 </code></pre>
 </video>
 <p>The debugger may look intimidating at first, but don’t worry, soon we’ll be very familiar with it!
@@ -860,7 +853,7 @@ Emulators (including hardware emulators such as flashcarts) must emulate the har
 The header being the only source of information about what hardware the ROM’s cartridge should contain, they rely on some of the values in the header.</p>
 <h2 id="boot-rom"><a class="header" href="#boot-rom">Boot ROM</a></h2>
 <p>The header is intimately tied to what is called the <strong>boot ROM</strong>.</p>
-<p>The most observant and/or nostalgic of you may have noticed the lack of the boot-up animation and the Game Boy’s signature “ba-ding!” in BGB.
+<p>The most observant and/or nostalgic of you may have noticed the lack of the boot-up animation and the Game Boy’s signature “ba-ding!” in Emulicious.
 When the console powers up, the CPU does not begin executing instructions at address $0100 (where our ROM’s entry point is), but at $0000.</p>
 <p>However, at that time, a small program called the <em>boot ROM</em>, burned within the CPU’s silicon, is “overlaid” on top of our ROM!
 The boot ROM is responsible for the startup animation, but it also checks the ROM’s header!
@@ -868,9 +861,10 @@ Specifically, it verifies that the Nintendo logo and header checksums are correc
 <div class="box tip">
 <p class="box-title">For the curious</p><p>You can find a more detailed description of what the boot ROM does <a href="https://gbdev.io/pandocs/Power_Up_Sequence">in the Pan Docs</a>, as well as an explanation of the logo check.
 Beware that it is quite advanced, though.</p>
-<p>If you want to enable the boot ROMs in BGB, you must obtain a copy of the boot ROM(s), whose SHA256 checksums can be found <a href="https://github.com/ISSOtm/gb-bootroms/blob/master/sha256sums.txt">in their disassembly</a> for verification.
+<p>If you want to enable the boot ROMs in Emulicious, you must obtain a copy of the boot ROM(s), whose SHA256 checksums can be found <a href="https://github.com/ISSOtm/gb-bootroms/blob/master/sha256sums.txt">in their disassembly</a> for verification.
 If you wish, you can also compile <a href="https://github.com/LIJI32/SameBoy#compilation">SameBoy’s boot ROMs</a> and use those instead, as a free-software substitute.</p>
-<p>Then, in BGB’s options, go to the <code>System</code> tab, set the paths to the boot ROMs you wish to use, tick <code>Enable bootroms</code>, select the appropriate system, and click <code>OK</code> or <code>Apply</code>.
+<p>Then, in Emulicious’ options, go to the <code>Options</code> tab, then <code>Emulation</code>→<code>Game Boy</code>, and choose which of GB and/or GBC boot roms you want to set.
+Finally, set the path(s) to the boot ROM(s) you wish to use, and click <code>Open</code>.
 Now, just reset the emulator, and voilà!</p>
 </div>
 <p>A header is typically called “valid” if it would pass the boot ROM’s checks, and “invalid” otherwise.</p>
@@ -890,25 +884,20 @@ This line.</p>
 <span class="console-line hljs-meta"></span><span class="language-bash">rgblink -o hello-world.gb -n hello-world.sym hello-world.o</span>
 </code></pre>
 <p>(I am intentionally not running RGBFIX; we will see why in a minute.)</p>
-<div class="box danger">
-<p>Make sure the boot ROMs are not enabled for this!
-If they are, make sure to disable them (untick their box in the options, click <code>OK</code> or <code>Apply</code>, and reset the emulator).</p>
-</div>
 <p><img src="part1/../assets/img/bad_warnings.png" alt="“This rom would not work on a real gameboy.”" /></p>
-<p>As I explained, RGBFIX is responsible for writing the header, so we should use it to fix these warnings.</p>
+<p>As I explained, RGBFIX is responsible for writing the header, so we should use it to fix this exception.</p>
 <pre><code><span class="console-line hljs-meta"></span><span class="language-bash">rgbfix -v -p 0xFF hello-world.gb</span>
 warning: Overwrote a non-zero byte in the Nintendo logo
 warning: Overwrote a non-zero byte in the header checksum
+warning: Overwrote a non-zero byte in the global checksum
 </code></pre>
 <p><em>I’m sure these warnings are nothing to be worried about…</em>
 (Depending on your version of RGBDS, you may have gotten different warnings, or none at all.)</p>
-<p>Let’s run the ROM…</p>
-<p><img src="part1/../assets/img/unsupp_ram_size.png" alt="Screenshot of BGB reporting “Unsupported RAM size”" /></p>
-<p>… dismiss this pesky warning, and…</p>
+<p>Let’s run the ROM, click on Console on the debugger’s bottom window, press <kbd><kbd>F5</kbd></kbd> a few times, and…</p>
 <figure>
-  <img src="part1/../assets/img/invalid_opcode.png" alt="Screenshot of BGB's debugger, the title bar reads &quot;invalid opcode&quot;">
+  <img src="part1/../assets/img/invalid_opcode.png" alt="Screenshot of Emulicious' debugger, PC won't advance past $0105">
   <figcaption>
-    When the debugger pops open on its own, and the title bar reads "invalid opcode", you <em>might</em> have screwed up somewhere.
+    When the console reads "Executing illegal instruction", you <i>might</i> have screwed up somewhere.
   </figcaption>
 </figure>
 <p><img src="part1/../assets/img/fine.png" alt="“This is fine” meme strip" /></p>
@@ -1136,28 +1125,10 @@ Top-left is the code viewer, bottom-left is the data viewer, top-right are some 
 What’s the stack?
 We will answer that question a bit later… in Part Ⅱ 😅</p>
 <h2 id="setup-1"><a class="header" href="#setup-1">Setup</a></h2>
-<p>For now, let’s focus on the code viewer.
-If you focus the debugger while the emulator is running, it will pause, as indicated by the screen window’s title changing to <code>bgb (debugging)</code>.</p>
-<p>Okay, but what’s with this weird syntax?
-Well, there are several syntaxes for Game Boy assembly, and BGB doesn’t use RGBDS’ by default.
-We can fix that in the options, which we can access by either:</p>
-<ul>
-<li>Right-clicking the screen and selecting “Options”</li>
-<li>In the debugger, open the “Window” menu, and select “Options”</li>
-<li>Press <kbd><kbd>F11</kbd></kbd> while focusing either the screen or debugger</li>
-</ul>
-<p>BGB has a <em>ton</em> of options, but don’t worry, it’s got good defaults, so we don’t need to look at most of them for now.
-Select the “Debug” tab, and set “Disasm syntax” to “rgbds”.
-Oh, and check the “Local symbols” box, too.
-Now, click “OK” to apply the options.</p>
-<p><img src="part1/../assets/img/options.png" alt="Screenshot of the options window" /></p>
-<div class="box warning">
-<p>You can also customize a lot of key bindings in the options, but I will stick to the default ones for this tutorial for the sake of simplicity.</p>
-</div>
-<p>Alright, great!
-But where are the labels?
-Well, as we have seen a couple of lessons ago, labels are merely a convenience provided by RGBASM, but they are not part of the ROM itself.
-It is very much inconvenient to debug without them, and so sym files (for “<strong>sym</strong>bols”) have been developed.
+<p>For now, let’s focus on the code viewer.</p>
+<p>As Emulicious can load our source code, our code’s labels and comments are automatically shown in the debugger.
+As we have seen a couple of lessons ago, labels are merely a convenience provided by RGBASM, but they are not part of the ROM itself.
+In other emulators, it is very much inconvenient to debug without them, and so sym files (for “<strong>sym</strong>bols”) have been developed.
 Let’s run RGBLINK to generate a sym file for our ROM:</p>
 <pre><code><span class="console-line hljs-meta"></span><span class="language-bash">rgblink -n hello-world.sym hello-world.o</span>
 </code></pre>
@@ -1165,16 +1136,7 @@ Let’s run RGBLINK to generate a sym file for our ROM:</p>
 <div><p>‼️</p></div>
 <div>
 <p>The file names matter!
-When looking for a ROM’s sym file, BGB takes the ROM’s file name, strips the extension (here, <code>.gb</code>), replaces it with <code>.sym</code>, and looks for a file <strong>in the same directory</strong> with that name.</p>
-</div>
-</div>
-<p>Then, in the debugger, we can go in the “File” menu and select “reload SYM file”.</p>
-<p><img src="part1/../assets/img/labels.png" alt="Screenshot of the debugger showing the labels in the code viewer" /></p>
-<p>Much better!</p>
-<div class="box tip decorated">
-<div><p>🔍</p></div>
-<div>
-<p>If a sym file is loaded, pressing <kbd><kbd>Tab</kbd></kbd> allows toggling whether labels are displayed or not.</p>
+When looking for a ROM’s sym file, emulators take the ROM’s file name, strip the extension (here, <code>.gb</code>), replace it with <code>.sym</code>, and look for a file <strong>in the same directory</strong> with that name.</p>
 </div>
 </div>
 <h2 id="stepping"><a class="header" href="#stepping">Stepping</a></h2>
@@ -1187,54 +1149,51 @@ When looking for a ROM’s sym file, BGB takes the ROM’s file name, strips the
 </div>
 </div>
 <p>If we want to watch execution from the beginning, we need to reset the emulator.
-Go into the debugger’s “Run” menu, and select “Reset”, or tap your numpad’s <kbd><kbd>*</kbd></kbd> key.</p>
+Go into the emulator’s “File” menu, and select “Reset”, or press <kbd><kbd>Ctrl</kbd>+<kbd>Backspace</kbd></kbd>.</p>
 <p>The blue line should automatically move to address $0100<sup class="footnote-reference"><a href="#boot_addr">1</a></sup>, and now we’re ready to trace!
 All the commands for that are in the “Run” menu.</p>
 <ul>
-<li>“Run” simply unpauses the emulator. Clicking on the screen also does the same.</li>
-<li>“Trace” (more commonly known as “Step Into”) and “Step Over” advance the emulator by one instruction.
-They only really differ on the <code>call</code> instruction and interrupts, neither of which we are using here, so we will use “Trace”.</li>
+<li>“Resume” simply unpauses the emulator.</li>
+<li>“Step Into” and “Step Over” advance the emulator by one instruction.
+They only really differ on the <code>call</code> instruction, interrupts, and when encountering a conditional jump, neither of which we are using here, so we will use “Step Into”.</li>
 <li>The other options are not relevant for now.</li>
 </ul>
-<p>We will have to “Trace” a bunch of times, so it’s a good idea to use the key shortcut.
-If we press <kbd><kbd>F7</kbd></kbd> once, the <code>jp EntryPoint</code> is executed.
+<p>We will have to “Step Into” a bunch of times, so it’s a good idea to use the key shortcut.
+If we press <kbd><kbd>F5</kbd></kbd> once, the <code>jp EntryPoint</code> is executed.
 And if we press it a few more times, can see the instructions being executed, one by one!</p>
 <video controls poster="../assets/vid/reset_trace.poster.png">
   <source src="../assets/vid/reset_trace.webm" type="video/webm">
   <source src="../assets/vid/reset_trace.mp4" type="video/mp4">
-<img src="part1/../assets/vid/reset_trace.gif" alt="Video demonstration in BGB">
+<img src="part1/../assets/vid/reset_trace.gif" alt="Video demonstration in Emulicious">
 </video>
 <p>Now, you may notice the <code>WaitVBlank</code> loop runs a <em>lot</em> of times, but what we are interested in is the <code>CopyTiles</code> loop.
 We can easily skip over it in several ways; this time, we will use a <em>breakpoint</em>.
-We will place the breakpoint on the <code>ld de, Tiles</code> at <code>00:0162</code>; either double-click on that line, or select it and press <kbd><kbd>F2</kbd></kbd>.
-The line will turn red:</p>
+We will place the breakpoint on the <code>ld de, Tiles</code> at <code>00:0162</code>; either double-click on that line, or select it and press <kbd><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd></kbd>.</p>
 <p><img src="part1/../assets/img/breakpoint.png" alt="Debugger screenshot showcasing the breakpoint" /></p>
-<p>Then you can resume execution either by clicking the screen or pressing <kbd><kbd>F9</kbd></kbd>, and BGB will automatically pause.
-Whenever BGB is running, and the (emulated) CPU is about to execute an instruction a breakpoint was placed on, it automatically pauses.</p>
+<p>Then you can resume execution by pressing <kbd><kbd>F8</kbd></kbd>.
+Whenever Emulicious is running, and the (emulated) CPU is about to execute an instruction a breakpoint was placed on, it automatically pauses.</p>
 <p><img src="part1/../assets/img/bkpt_pause.png" alt="Debugger screenshot showcasing execution paused on the breakpoint" /></p>
 <p>You can see where execution is being paused both from the green arrow and the value of PC.</p>
 <p>If we trace the next three instructions, we can see the three arguments to the <code>CopyTiles</code> loop getting loaded into registers.</p>
 <p><img src="part1/../assets/img/regs_copytiles.png" alt="The state of some registers at the beginning of the CopyTiles loop" /></p>
 <p>For fun, let’s watch the tiles as they’re being copied.
-For that, obviously, we will use the data viewer, and position it at the destination.
+For that, obviously, we will use the Memory Editor, and position it at the destination.
 As we can see from the image above, that would be $9000!</p>
-<p>Select the data viewer (either click somewhere in it, or use <kbd><kbd>Ctrl</kbd>+<kbd>Tab</kbd></kbd> to switch focus, as indicated by the grey bar on the left), and press Ctrl+G (for “Goto”).
-In the popup, type the address you wish to go to, in our case <code>9000</code> (sans dollar sign!!).</p>
+<p>Click on “Memory” on the bottom window, then “VRAM”, and press <kbd><kbd>Ctrl</kbd>+<kbd>G</kbd></kbd> (for “Goto”).</p>
 <video controls poster="../assets/vid/trace_copy.poster.png">
   <source src="../assets/vid/trace_copy.webm" type="video/webm">
   <source src="../assets/vid/trace_copy.mp4" type="video/mp4">
-<img src="part1/../assets/vid/trace_copy.gif" alt="Video demonstration in BGB">
+<img src="part1/../assets/vid/trace_copy.gif" alt="Video demonstration in Emulicious">
 </video>
 <p>Awesome, right?</p>
 <h2 id="what-next"><a class="header" href="#what-next">What next?</a></h2>
 <p>Congrats, you have just learned how to use a debugger!
-We have only scratched the surface, though; we will use more of BGB’s tools to illustrate the next parts.
+We have only scratched the surface, though; we will use more of Emulicious’ tools to illustrate the next parts.
 Don’t worry, from here on, lessons will go with a lot more images—you’ve made it through the hardest part!</p>
 <hr />
-<div class="footnote-definition" id="boot_addr"><sup class="footnote-definition-label">1</sup>
+<div class="footnote-definition" id="boot_addr"><sup class="footnote-definition-label">1</sup></div>
 <p>Why does execution start at $0100?
 That’s because it’s where the <a href="https://gbdev.io/pandocs/Power_Up_Sequence">boot ROM</a> hands off control to our game once it’s done.</p>
-</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tiles"><a class="header" href="#tiles">Tiles</a></h1>
 <div class="box tip decorated">
 <div><p>💭</p></div>
@@ -1253,12 +1212,11 @@ The term “CHR” is typically not used on the Game Boy, though exchanges betwe
 </figure>
 <p>Let’s see about that!</p>
 <h2 id="helpful-hand"><a class="header" href="#helpful-hand">Helpful hand</a></h2>
-<p>Now, figuring out the format with an explanation alone is going to be very confusing; but fortunately, BGB got us covered thanks to its <em>VRAM viewer</em>.
-You can open it either by selecting “Window” then “VRAM viewer”, or pressing F5 when the debugger is in focus.
-It is also in “Other” in the screen’s right-click menu.</p>
-<p><img src="part1/../assets/img/vram_viewer.png" alt="Screenshot of the VRAM viewer’s “Tiles” tab" /></p>
-<p>By default, it should open on the “Tiles” tab like in the image, but if not, please select that.
-We will come to the other tabs in due time.
+<p>Now, figuring out the format with an explanation alone is going to be very confusing; but fortunately, Emulicious got us covered thanks to its <em>Tile Viewer</em>.
+You can open it either by selecting “Tools” then “Tile Viewer”, or by clicking on the grid of colored tiles in the debugger’s toolbar.</p>
+<p><img src="part1/../assets/img/vram_viewer.png" alt="Screenshot of the Tile Viewer" /></p>
+<p>You can combine the various VRAM viewers by going to “View”, then “Combine Video Viewers”.
+We will come to the other viewers in due time.
 This one shows the tiles present in the Game Boy’s video memory (or “<abbr title="Video RAM">VRAM</abbr>”).</p>
 <div class="box tip decorated">
 <div><p>🤔</p></div>
@@ -1266,8 +1224,7 @@ This one shows the tiles present in the Game Boy’s video memory (or “<abbr t
 <p>I encourage you to experiment with the VRAM viewer, hover over things, tick and untick checkboxes, see by yourself what’s what. Any questions you might have will be answered in due time, don’t worry! And if what you’re seeing later on doesn’t match my screenshots, ensure that the checkboxes match mine.</p>
 </div>
 </div>
-<p>Don’t mind the “Nintendo” in the top-left; we did not put it there ourselves, and we will see why it’s there later.
-We will also be ignoring the right half of the tile grid, as it is exclusive to the Game Boy Color: we will get there when we get there.</p>
+<p>Don’t mind the “®” icon in the top-left; we did not put it there ourselves, and we will see why it’s there later.</p>
 <h2 id="short-primer"><a class="header" href="#short-primer">Short primer</a></h2>
 <p>You may have heard of tiles before, especially as they were really popular in 8-bit and 16-bit systems.
 That’s no coincidence: tiles are very useful.
@@ -1316,16 +1273,9 @@ If you are wondering what “objects” are, you will have to wait until Part �
 We will not talk about Game Boy Color features in Part Ⅰ for the sake of simplicity, but we will do so in later parts.</p>
 </div>
 </div>
-<p>Please select the “Palettes” tab of BGB’s VRAM viewer.</p>
+<p>If you chose to combine the video viewers in the previous chapter, the palette viewer should show up on the bottom left of the video viewer.
+Otherwise, please select Emulicious’ “Tools” tab, then select <code>Palette Viewer</code>.</p>
 <p><img src="part1/../assets/img/pal_viewer.png" alt="Screenshot of the VRAM viewer’s Palette tab" /></p>
-<div class="box tip decorated">
-<div><p>🥴</p></div>
-<div>
-<p>The VRAM viewer’s layout may seem weird.
-As mentioned in the previous tip box, the Game Boy Color changed the way palettes work, and the Super Game Boy throws another wrench into the mix.</p>
-<p>The VRAM viewer uses the same layout for monochrome and Color, leading to this admittedly strange layout.</p>
-</div>
-</div>
 <p>We will be taking a look at the “BGP” line.
 As I explained before, tiles store “color indices” for each pixel, which are used to index into the palette.
 Color number 0<sup class="footnote-reference"><a href="#numbering_zero">1</a></sup> is the leftmost in that line, and number 3 is the rightmost.</p>
@@ -1338,7 +1288,7 @@ And, even better, the Game Boy Color will automatically colorize games that lack
 <h2 id="getting-our-hands-dirty"><a class="header" href="#getting-our-hands-dirty">Getting our hands dirty</a></h2>
 <p>Well, so far in this tutorial, besides running the Hello World, we have been pretty passive, watching it unfold.
 What do you say we start prodding the ROM a bit?</p>
-<p>In BGB’s debugger, select the “Window” menu, and open the “IO map” (or just press <kbd><kbd>F10</kbd></kbd> within the debugger).</p>
+<p>In Emulicious’ debugger, select the “Variables” tab on the left to show the IO registers.</p>
 <p><img src="part1/../assets/img/io_map.png" alt="Screenshot of the IO map" /></p>
 <p>While the VRAM viewer offers a visual representation of the palette, the IO map shows the nitty-gritty: how it’s encoded.
 The IO map also lets us modify BGP easily; but to do so, we need to understand <em>how</em> values we write are turned into colors.</p>
@@ -1357,7 +1307,7 @@ And this matches what the VRAM viewer is showing us: color number 0, the rightmo
 <p>For fun, let’s make the screen completely black.
 We can easily do this by setting all colors in the palette to black (%11).
 This would be <code>%11 %11 %11 %11 = $FF</code>.</p>
-<p>In the IO map, click the text box left of “BGP”, erase the “E4”, type “FF”, and hit Enter.
+<p>In the “Variables” tab in the debugger, click on the byte to the right of BGP, erase the “E4”, type “FF”, and hit Enter.
 BGP immediately updates, turning the screen black!</p>
 <figure>
 	<img src="part1/../assets/img/pal_viewer_black.png" alt="Screenshot of the palette viewer with the BGP line entirely black">
@@ -1375,18 +1325,16 @@ We would get thus:</p>
 	<img src="part1/../assets/img/hello_world_inv.png" alt="Screenshot of the color-inverted Hello World">
 	<figcaption>If you got it right, it should look like this!</figcaption>
 </figure>
-<p>If you go to the Tile Viewer and uncheck the “show paletted” checkbox, you will notice that the tile data stays the same regardless of how the palette is modified!
+<p>If you go to the Tile Viewer and change “Palette” to “Gray”, you will notice that the tile data stays the same regardless of how the palette is modified!
 This is an advantage of using palettes: fading the screen in and out is very cheap, just modifying a single byte, instead of having to update every single on-screen pixel.</p>
 <p>Got all that?
 Then let’s take a look at the last missing puzzle piece in the Hello World’s rendering process, the <strong>tilemap</strong>!</p>
 <hr />
-<div class="footnote-definition" id="numbering_zero"><sup class="footnote-definition-label">1</sup>
+<div class="footnote-definition" id="numbering_zero"><sup class="footnote-definition-label">1</sup></div>
 <p>Numbering often starts at 0 when working with computers.
 We will understand why later, but for now, please bear with it!</p>
-</div>
-<div class="footnote-definition" id="console_detection"><sup class="footnote-definition-label">2</sup>
+<div class="footnote-definition" id="console_detection"><sup class="footnote-definition-label">2</sup></div>
 <p>Well, it is possible to detect these different models and account for them, but this would require taking plenty of corner cases into consideration, so it’s probably not worth the effort.</p>
-</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tilemap"><a class="header" href="#tilemap">Tilemap</a></h1>
 <div class="box tip decorated">
 <div><p>🧐</p></div>
@@ -1399,7 +1347,7 @@ I will be using the latter by preference, but I also stay consistent with it in 
 We have seen how graphics on the Game Boy are composed of 8×8 “tiles”, and we have seen how color is added into the mix.</p>
 <p>But we have not seen yet how those tiles are arranged into a final picture!</p>
 <p>Tiles are basically a grid of pixels; well, the tilemaps are basically a grid of tiles!
-To allow for cheap reuse, tiles aren’t stored in the tilemap directly; instead, tiles are referred to by an <em>ID</em>, which you can see in BGB’s VRAM viewer.</p>
+To allow for cheap reuse, tiles aren’t stored in the tilemap directly; instead, tiles are referred to by an <em>ID</em>, which you can see in Emulicious’ Tile Viewer.</p>
 <figure>
   <img src="part1/../assets/img/tile_id.png" alt="Screenshot highlighting where a tile's ID can be seen">
   <figcaption>
@@ -1412,13 +1360,13 @@ To allow for cheap reuse, tiles aren’t stored in the tilemap directly; instead
 IDs are stored in bytes, so there are 256 possible tile IDs.
 However, the astute reader will have noticed that there are 384 tiles in total<sup class="footnote-reference"><a href="#tile_blocks">1</a></sup>!
 By virtue of the <a href="https://en.wikipedia.org/wiki/Pigeonhole_principle">pigeonhole principle</a>, this means that some IDs refer to several tiles at the same time.</p>
-<p>Indeed, BGB reports that the first 128 tiles have the same IDs as the last 128.
+<p>Indeed, Emulicious reports that the first 128 tiles have the same IDs as the last 128.
 There exists a mechanism to select whether IDs 0–127 reference the first or last 128 tiles, but for simplicity’s sake, we will overlook this for now, so please ignore the first (topmost) 128 tiles for the time being.</p>
-<p>Now, please turn your attention to the “BG map” tab of BGB’s VRAM viewer, pictured below.</p>
+<p>Now, please turn your attention to Emulicious’ Tilemap Viewer, pictured below.</p>
 <p><img src="part1/../assets/img/tilemap_viewer.png" alt="Screenshot of the tilemap viewer" /></p>
 <div class="box tip">
 <p>You may notice that the image shown is larger than what is displayed on-screen.
-Only part of the tilemap, outlined by a thicker border in the VRAM viewer, is displayed on-screen at a given time.
+Only part of the tilemap, outlined by a thicker border in the Tilemap Viewer, is displayed on-screen at a given time.
 We will explain this in more detail in Part Ⅱ.</p>
 </div>
 <p>Here we will be able to see the power of tile reuse in full force.
@@ -1438,7 +1386,7 @@ You can confirm this by hovering over tiles in the BG map tab, which shows the I
 <hr />
 <div class="footnote-definition" id="tile_blocks"><sup class="footnote-definition-label">1</sup>
 <p>The even more astute (astuter?) reader will have noticed that 384 = 3 × 128.
-Thus, tiles are often conceptually grouped into three “blocks” of 128 tiles each, which BGB shows as separated by thicker horizontal lines.</p>
+Thus, tiles are often conceptually grouped into three “blocks” of 128 tiles each, which Emulicious shows as separated by thicker horizontal lines.</p>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="wrapping-up"><a class="header" href="#wrapping-up">Wrapping up</a></h1>
 <p>Congrats!
@@ -1683,8 +1631,8 @@ The tile ID and attributes are both set to 0.</p>
 <p>You may remember from the previous lesson that we’re already using tile ID 0, as it’s the start of our background’s graphics.
 However, by default objects and backgrounds use a different set of tiles, at least for the first 128 IDs.
 Tiles with IDs 128–255 are shared by both, which is useful if you have a tile that’s used both on the background and by an object.</p>
-<p>If you press F5 in BGB to open the VRAM viewer, you should see three distinct sections.</p>
-<p><img src="https://user-images.githubusercontent.com/14899090/196176886-8ede7369-c172-45fa-9128-cc238c15b1e8.png" alt="image" /></p>
+<p>If you go to “Tools”, then “Tile Viewer” in Emulicious’ debugger, you should see three distinct sections.</p>
+<p><img src="part2/../assets/img/vram_viewer.png" alt="image" /></p>
 <p>Because we need to load this to a different area, we’ll use the address $8000 and load a graphic for our game’s paddle.
 Let’s do so right after <code>CopyTilemap</code>:</p>
 <pre><code class="language-rgbasm linenos start=46">	; Copy the tile data

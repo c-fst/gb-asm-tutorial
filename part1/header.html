@@ -214,7 +214,7 @@ Emulators (including hardware emulators such as flashcarts) must emulate the har
 The header being the only source of information about what hardware the ROM’s cartridge should contain, they rely on some of the values in the header.</p>
 <h2 id="boot-rom"><a class="header" href="#boot-rom">Boot ROM</a></h2>
 <p>The header is intimately tied to what is called the <strong>boot ROM</strong>.</p>
-<p>The most observant and/or nostalgic of you may have noticed the lack of the boot-up animation and the Game Boy’s signature “ba-ding!” in BGB.
+<p>The most observant and/or nostalgic of you may have noticed the lack of the boot-up animation and the Game Boy’s signature “ba-ding!” in Emulicious.
 When the console powers up, the CPU does not begin executing instructions at address $0100 (where our ROM’s entry point is), but at $0000.</p>
 <p>However, at that time, a small program called the <em>boot ROM</em>, burned within the CPU’s silicon, is “overlaid” on top of our ROM!
 The boot ROM is responsible for the startup animation, but it also checks the ROM’s header!
@@ -222,9 +222,10 @@ Specifically, it verifies that the Nintendo logo and header checksums are correc
 <div class="box tip">
 <p class="box-title">For the curious</p><p>You can find a more detailed description of what the boot ROM does <a href="https://gbdev.io/pandocs/Power_Up_Sequence">in the Pan Docs</a>, as well as an explanation of the logo check.
 Beware that it is quite advanced, though.</p>
-<p>If you want to enable the boot ROMs in BGB, you must obtain a copy of the boot ROM(s), whose SHA256 checksums can be found <a href="https://github.com/ISSOtm/gb-bootroms/blob/master/sha256sums.txt">in their disassembly</a> for verification.
+<p>If you want to enable the boot ROMs in Emulicious, you must obtain a copy of the boot ROM(s), whose SHA256 checksums can be found <a href="https://github.com/ISSOtm/gb-bootroms/blob/master/sha256sums.txt">in their disassembly</a> for verification.
 If you wish, you can also compile <a href="https://github.com/LIJI32/SameBoy#compilation">SameBoy’s boot ROMs</a> and use those instead, as a free-software substitute.</p>
-<p>Then, in BGB’s options, go to the <code>System</code> tab, set the paths to the boot ROMs you wish to use, tick <code>Enable bootroms</code>, select the appropriate system, and click <code>OK</code> or <code>Apply</code>.
+<p>Then, in Emulicious’ options, go to the <code>Options</code> tab, then <code>Emulation</code>→<code>Game Boy</code>, and choose which of GB and/or GBC boot roms you want to set.
+Finally, set the path(s) to the boot ROM(s) you wish to use, and click <code>Open</code>.
 Now, just reset the emulator, and voilà!</p>
 </div>
 <p>A header is typically called “valid” if it would pass the boot ROM’s checks, and “invalid” otherwise.</p>
@@ -244,25 +245,20 @@ This line.</p>
 <span class="console-line hljs-meta"></span><span class="language-bash">rgblink -o hello-world.gb -n hello-world.sym hello-world.o</span>
 </code></pre>
 <p>(I am intentionally not running RGBFIX; we will see why in a minute.)</p>
-<div class="box danger">
-<p>Make sure the boot ROMs are not enabled for this!
-If they are, make sure to disable them (untick their box in the options, click <code>OK</code> or <code>Apply</code>, and reset the emulator).</p>
-</div>
 <p><img src="../assets/img/bad_warnings.png" alt="“This rom would not work on a real gameboy.”" /></p>
-<p>As I explained, RGBFIX is responsible for writing the header, so we should use it to fix these warnings.</p>
+<p>As I explained, RGBFIX is responsible for writing the header, so we should use it to fix this exception.</p>
 <pre><code><span class="console-line hljs-meta"></span><span class="language-bash">rgbfix -v -p 0xFF hello-world.gb</span>
 warning: Overwrote a non-zero byte in the Nintendo logo
 warning: Overwrote a non-zero byte in the header checksum
+warning: Overwrote a non-zero byte in the global checksum
 </code></pre>
 <p><em>I’m sure these warnings are nothing to be worried about…</em>
 (Depending on your version of RGBDS, you may have gotten different warnings, or none at all.)</p>
-<p>Let’s run the ROM…</p>
-<p><img src="../assets/img/unsupp_ram_size.png" alt="Screenshot of BGB reporting “Unsupported RAM size”" /></p>
-<p>… dismiss this pesky warning, and…</p>
+<p>Let’s run the ROM, click on Console on the debugger’s bottom window, press <kbd><kbd>F5</kbd></kbd> a few times, and…</p>
 <figure>
-  <img src="../assets/img/invalid_opcode.png" alt="Screenshot of BGB's debugger, the title bar reads &quot;invalid opcode&quot;">
+  <img src="../assets/img/invalid_opcode.png" alt="Screenshot of Emulicious' debugger, PC won't advance past $0105">
   <figcaption>
-    When the debugger pops open on its own, and the title bar reads "invalid opcode", you <em>might</em> have screwed up somewhere.
+    When the console reads "Executing illegal instruction", you <i>might</i> have screwed up somewhere.
   </figcaption>
 </figure>
 <p><img src="../assets/img/fine.png" alt="“This is fine” meme strip" /></p>

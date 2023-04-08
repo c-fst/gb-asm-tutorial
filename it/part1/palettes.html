@@ -194,7 +194,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="palette"><a class="header" href="#palette">Palette</a></h1>
-<p>Nella lezione precedente, ho accennato brevemente al fatto che i colori vengono applicati alle piastrelle tramite le <em>palette</em>, ma non ne abbiamo ancora parlato molto.</p>
+<p>In the previous lesson, I briefly mentioned that colors are applied to tiles via <em>palettes</em>, but we haven’t talked much about those yet.</p>
 <p>Il Game Boy in bianco e nero ha tre tavolozze, una per lo sfondo chiamata <a href="https://gbdev.io/pandocs/Palettes.html#ff47---bgp-bg-palette-data-rw---non-cgb-mode-only"><code>BGP</code></a> (“BackGround Palette”), e due per gli oggetti chiamate <a href="https://gbdev.io/pandocs/Palettes.html#ff48---obp0-object-palette-0-data-rw---non-cgb-mode-only"><code>OBP0</code></a> e <a href="https://gbdev.io/pandocs/Palettes.html#ff48---obp1-object-palette-1-data-rw---non-cgb-mode-only"><code>OBP1</code></a> (“OBject Palette 0/1”).
 Se vi state chiedendo cosa siano gli “oggetti”, dovrete aspettare la Parte Ⅱ per scoprirlo; per ora, concentriamoci sullo sfondo.</p>
 <div class="box tip decorated">
@@ -204,16 +204,9 @@ Se vi state chiedendo cosa siano gli “oggetti”, dovrete aspettare la Parte �
 Non parleremo delle caratteristiche del Game Boy Color nella Parte Ⅰ per semplicità, ma lo faremo nelle parti successive.</p>
 </div>
 </div>
-<p>Selezionare la scheda “Palette” del visualizzatore VRAM di BGB.</p>
+<p>If you chose to combine the video viewers in the previous chapter, the palette viewer should show up on the bottom left of the video viewer.
+Otherwise, please select Emulicious’ “Tools” tab, then select <code>Palette Viewer</code>.</p>
 <p><img src="../assets/img/pal_viewer.png" alt="Schermata della scheda Palette del visualizzatore VRAM" /></p>
-<div class="box tip decorated">
-<div><p>🥴</p></div>
-<div>
-<p>Il layout del visualizzatore VRAM può sembrare strano.
-Come accennato nel precedente riquadro, il Game Boy Color ha cambiato il modo in cui funzionano le tavolozze, e il Super Game Boy ha dato un’ulteriore svolta alla situazione.</p>
-<p>Il visualizzatore VRAM utilizza lo stesso layout per il monocromatico e per il colore, dando origine a questa strana disposizione.</p>
-</div>
-</div>
 <p>Daremo un’occhiata alla linea “BGP”.
 Come ho spiegato in precedenza, i riquadri memorizzano gli “indici di colore” per ciascun pixel, che vengono utilizzati per indicizzare la tavolozza.
 Il colore numero 0<sup class="footnote-reference"><a href="#numerazione_zero">1</a></sup> è il più a sinistra in questa riga e il numero 3 è il più a destra.</p>
@@ -226,17 +219,17 @@ Inoltre, il Game Boy Color è in grado di colorare automaticamente i giochi che 
 <h2 id="sporcarsi-le-mani"><a class="header" href="#sporcarsi-le-mani">Sporcarsi le mani</a></h2>
 <p>Finora in questo tutorial, a parte l’esecuzione di Hello World, siamo stati piuttosto passivi, osservando il suo svolgimento.
 Che ne dite se iniziamo a smuovere un po’ la ROM?</p>
-<p>Nel debugger di BGB, selezionare il menu “Finestra” e aprire la “Mappa IO” (oppure premere semplicemente <kbd><kbd>F10</kbd></kbd> all’interno del debugger).</p>
+<p>In Emulicious’ debugger, select the “Variables” tab on the left to show the IO registers.</p>
 <p><img src="../assets/img/io_map.png" alt="Schermata della mappa IO" /></p>
-<p>Mentre il visualizzatore di VRAM offre una rappresentazione visiva della tavolozza, la mappa IO mostra il dettaglio: come viene codificata.
-La mappa IO ci permette anche di modificare facilmente il BGP; ma per farlo, dobbiamo capire <em>come</em> i valori che scriviamo vengono trasformati in colori.</p>
+<p>While the VRAM viewer offers a visual representation of the palette, the IO map shows the nitty-gritty: how it’s encoded.
+The IO map also lets us modify BGP easily; but to do so, we need to understand <em>how</em> values we write are turned into colors.</p>
 <h3 id="codifica"><a class="header" href="#codifica">Codifica</a></h3>
 <p>Fortunatamente, la codifica è molto semplice.
 La spiegherò e allo stesso tempo fornirò un esempio con la tavolozza che abbiamo a portata di mano, $E4.</p>
-<p>Prendete il byte, suddividete i suoi 8 bit in 4 gruppi di 2.</p>
+<p>Take the byte, break its 8 bits into 4 groups of 2.</p>
 <pre><code>[BGP] = $E4
-$E4 = %11100100 (rinfrescate la memoria nella lezione &quot;Binario ed esadecimale&quot; se necessario!)
-Che viene suddiviso in %11, %10, %01, %00
+$E4 = %11100100 (refresh your memory in the &quot;Binary and hexadecimal&quot; lesson if needed!)
+That gets broken down into %11, %10, %01, %00
 </code></pre>
 <p>Il colore numero 0 è il “gruppo” più a destra, il colore numero 3 è quello più a sinistra.
 Semplice!
@@ -245,8 +238,8 @@ E questo corrisponde a ciò che ci mostra il visualizzatore VRAM: il colore nume
 <p>Per divertimento, rendiamo lo schermo completamente nero.
 Lo si può fare facilmente impostando tutti i colori della tavolozza sul nero (%11).
 Questo sarebbe <code>%11 %11 %11 %11 = $FF</code>.</p>
-<p>Nella mappa IO, fare clic sulla casella di testo a sinistra di “BGP”, cancellare “E4”, digitare “FF” e premere Invio.
-BGP si aggiorna immediatamente, facendo diventare lo schermo nero!</p>
+<p>In the “Variables” tab in the debugger, click on the byte to the right of BGP, erase the “E4”, type “FF”, and hit Enter.
+BGP immediately updates, turning the screen black!</p>
 <figure>
 	<img src="../assets/img/pal_viewer_black.png" alt="Screenshot of the palette viewer with the BGP line entirely black">
 	<figcaption>Osservate come la linea BGP sia ora completamente nera. Inoltre, avrei potuto mostrare un'immagine della schermata nera, ma sarebbe stato stupido.</figcaption>
@@ -263,18 +256,16 @@ Otterremmo così:</p>
 	<img src="../assets/img/hello_world_inv.png" alt="Screenshot of the color-inverted Hello World">
 	<figcaption>Se avete fatto bene, dovrebbe apparire così!</figcaption>
 </figure>
-<p>Se andate nel Tile Viewer e deselezionate la casella di controllo “show paletted”, noterete che i dati delle piastrelle rimangono invariati indipendentemente dalla modifica della tavolozza!
-Questo è un vantaggio dell’uso delle tavolozze: la dissolvenza dello schermo è molto economica, basta modificare un singolo byte, invece di dover aggiornare ogni singolo pixel sullo schermo.</p>
+<p>If you go to the Tile Viewer and change “Palette” to “Gray”, you will notice that the tile data stays the same regardless of how the palette is modified!
+This is an advantage of using palettes: fading the screen in and out is very cheap, just modifying a single byte, instead of having to update every single on-screen pixel.</p>
 <p>Avete capito tutto questo?
 Allora diamo un’occhiata all’ultimo pezzo mancante del puzzle nel processo di rendering di Hello World, la <strong>tilemap</strong>!</p>
 <hr />
-<div class="footnote-definition" id="numbering_zero"><sup class="footnote-definition-label">3</sup>
-<p>La numerazione inizia spesso da 0 quando si lavora con i computer.
-Capiremo il perché più avanti, ma per il momento, per favore, sopportate!</p>
-</div>
-<div class="footnote-definition" id="console_detection"><sup class="footnote-definition-label">2</sup>
-<p>È possibile rilevare questi diversi modelli e tenerne conto, ma ciò richiederebbe di prendere in considerazione molti casi particolari, quindi probabilmente non ne vale la pena.</p>
-</div>
+<div class="footnote-definition" id="numbering_zero"><sup class="footnote-definition-label">3</sup></div>
+<p>Numbering often starts at 0 when working with computers.
+We will understand why later, but for now, please bear with it!</p>
+<div class="footnote-definition" id="console_detection"><sup class="footnote-definition-label">2</sup></div>
+<p>Well, it is possible to detect these different models and account for them, but this would require taking plenty of corner cases into consideration, so it’s probably not worth the effort.</p>
 
                     </main>
 

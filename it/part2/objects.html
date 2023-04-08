@@ -253,8 +253,8 @@ L’ID tessera e gli attributi sono entrambi impostati a 0.</p>
 <p>Come si ricorderà dalla lezione precedente, stiamo già usando l’ID 0, che è l’inizio della grafica del nostro sfondo.
 Tuttavia, per impostazione predefinita, gli oggetti e gli sfondi utilizzano un insieme diverso di piastrelle, almeno per i primi 128 ID.
 Le mattonelle con ID 128-255 sono condivise da entrambi, il che è utile se si ha una mattonella che viene utilizzata sia dallo sfondo che da un oggetto.</p>
-<p>Se si preme F5 in BGB per aprire il visualizzatore VRAM, si dovrebbero vedere tre sezioni distinte.</p>
-<p><img src="https://user-images.githubusercontent.com/14899090/196176886-8ede7369-c172-45fa-9128-cc238c15b1e8.png" alt="image" /></p>
+<p>If you go to “Tools”, then “Tile Viewer” in Emulicious’ debugger, you should see three distinct sections.</p>
+<p><img src="../assets/img/vram_viewer.png" alt="image" /></p>
 <p>Poiché dobbiamo caricarla in un’area diversa, useremo l’indirizzo $8000 e caricheremo una grafica per la paletta del gioco.
 Lo faremo subito dopo <code>CopyTilemap</code>:</p>
 <pre><code class="language-rgbasm linenos start=46">	; Copy the tile data

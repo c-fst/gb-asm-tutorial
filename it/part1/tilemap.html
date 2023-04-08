@@ -204,8 +204,8 @@ Io userò quest’ultimo di preferenza, ma lo userò anche nel codice (<code>Til
 <p>Ci siamo quasi.
 Abbiamo visto come la grafica del Game Boy sia composta da “piastrelle” 8×8 e come il colore venga aggiunto al mix.</p>
 <p>Ma non abbiamo ancora visto come queste tessere vengono disposte in un’immagine finale!</p>
-<p>Le piastrelle sono fondamentalmente una griglia di pixel; beh, le tilemaps sono fondamentalmente una griglia di piastrelle!
-Per consentire un riutilizzo economico, le piastrelle non sono memorizzate direttamente nella tilemap; invece, le piastrelle sono indicate da un <em>ID</em>, che si può vedere nel visualizzatore VRAM di BGB.</p>
+<p>Tiles are basically a grid of pixels; well, the tilemaps are basically a grid of tiles!
+To allow for cheap reuse, tiles aren’t stored in the tilemap directly; instead, tiles are referred to by an <em>ID</em>, which you can see in Emulicious’ Tile Viewer.</p>
 <figure>
   <img src="../assets/img/tile_id.png" alt="Screenshot highlighting where a tile's ID can be seen">
   <figcaption>
@@ -218,14 +218,14 @@ Per consentire un riutilizzo economico, le piastrelle non sono memorizzate diret
 Gli ID sono memorizzati in byte, quindi ci sono 256 possibili ID di piastrelle.
 Tuttavia, il lettore più attento avrà notato che ci sono 384 tessere in totale<sup class="footnote-reference"><a href="#blocchi_di_tile">1</a></sup>!
 In virtù del <a href="https://en.wikipedia.org/wiki/Pigeonhole_principle">principio della piccionaia</a>, ciò significa che alcuni ID si riferiscono a più piastrelle contemporaneamente.</p>
-<p>In effetti, BGB riporta che le prime 128 tessere hanno gli stessi ID delle ultime 128. Esiste un meccanismo per selezionare se gli ID 0-127 si riferiscono alle prime o alle ultime 128 tessere.
-Esiste un meccanismo che permette di scegliere se gli ID 0-127 si riferiscono alle prime o alle ultime 128 tessere, ma per semplicità per il momento lo trascuriamo, quindi per il momento ignoriamo le prime 128 tessere (quelle più in alto).</p>
-<p>Ora, rivolgete la vostra attenzione alla scheda “BG map” del visualizzatore di VRAM di BGB, illustrata qui sotto.</p>
+<p>Indeed, Emulicious reports that the first 128 tiles have the same IDs as the last 128.
+There exists a mechanism to select whether IDs 0–127 reference the first or last 128 tiles, but for simplicity’s sake, we will overlook this for now, so please ignore the first (topmost) 128 tiles for the time being.</p>
+<p>Now, please turn your attention to Emulicious’ Tilemap Viewer, pictured below.</p>
 <p><img src="../assets/img/tilemap_viewer.png" alt="Schermata del visualizzatore di mappe di piastrelle" /></p>
 <div class="box tip">
-<p>Si può notare che l’immagine mostrata è più grande di quella visualizzata sullo schermo.
-Solo una parte della mappa di piastrelle, delineata da un bordo più spesso nel visualizzatore VRAM, viene visualizzata sullo schermo in un determinato momento.
-Questo aspetto sarà spiegato più dettagliatamente nella Parte Ⅱ.</p>
+<p>You may notice that the image shown is larger than what is displayed on-screen.
+Only part of the tilemap, outlined by a thicker border in the Tilemap Viewer, is displayed on-screen at a given time.
+We will explain this in more detail in Part Ⅱ.</p>
 </div>
 <p>Qui potremo vedere la potenza del riutilizzo dei tile in tutta la sua forza.
 Per comodità e per rinfrescare la memoria, ecco le tessere che il nostro Hello World carica nella VRAM:</p>
@@ -243,8 +243,8 @@ Anche la R, la L e la D condividono la loro tessera in alto a sinistra ($2D, lin
 <p>Tutto sommato, possiamo dedurre che la visualizzazione della grafica sul Game Boy consiste nel caricare i “modelli” (le tessere) e nel dire alla console quale tessera visualizzare per ciascuna posizione.</p>
 <hr />
 <div class="footnote-definition" id="tile_blocks"><sup class="footnote-definition-label">2</sup>
-<p>Il lettore ancora più astuto (astuto?) avrà notato che 384 = 3 × 128.
-Pertanto, le tessere sono spesso raggruppate concettualmente in tre “blocchi” di 128 tessere ciascuno, che BGB mostra separati da linee orizzontali più spesse.</p>
+<p>The even more astute (astuter?) reader will have noticed that 384 = 3 × 128.
+Thus, tiles are often conceptually grouped into three “blocks” of 128 tiles each, which Emulicious shows as separated by thicker horizontal lines.</p>
 </div>
 
                     </main>

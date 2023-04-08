@@ -202,28 +202,10 @@ Top-left is the code viewer, bottom-left is the data viewer, top-right are some 
 What’s the stack?
 We will answer that question a bit later… in Part Ⅱ 😅</p>
 <h2 id="setup"><a class="header" href="#setup">Setup</a></h2>
-<p>For now, let’s focus on the code viewer.
-If you focus the debugger while the emulator is running, it will pause, as indicated by the screen window’s title changing to <code>bgb (debugging)</code>.</p>
-<p>Okay, but what’s with this weird syntax?
-Well, there are several syntaxes for Game Boy assembly, and BGB doesn’t use RGBDS’ by default.
-We can fix that in the options, which we can access by either:</p>
-<ul>
-<li>Right-clicking the screen and selecting “Options”</li>
-<li>In the debugger, open the “Window” menu, and select “Options”</li>
-<li>Press <kbd><kbd>F11</kbd></kbd> while focusing either the screen or debugger</li>
-</ul>
-<p>BGB has a <em>ton</em> of options, but don’t worry, it’s got good defaults, so we don’t need to look at most of them for now.
-Select the “Debug” tab, and set “Disasm syntax” to “rgbds”.
-Oh, and check the “Local symbols” box, too.
-Now, click “OK” to apply the options.</p>
-<p><img src="../assets/img/options.png" alt="Screenshot of the options window" /></p>
-<div class="box warning">
-<p>You can also customize a lot of key bindings in the options, but I will stick to the default ones for this tutorial for the sake of simplicity.</p>
-</div>
-<p>Alright, great!
-But where are the labels?
-Well, as we have seen a couple of lessons ago, labels are merely a convenience provided by RGBASM, but they are not part of the ROM itself.
-It is very much inconvenient to debug without them, and so sym files (for “<strong>sym</strong>bols”) have been developed.
+<p>For now, let’s focus on the code viewer.</p>
+<p>As Emulicious can load our source code, our code’s labels and comments are automatically shown in the debugger.
+As we have seen a couple of lessons ago, labels are merely a convenience provided by RGBASM, but they are not part of the ROM itself.
+In other emulators, it is very much inconvenient to debug without them, and so sym files (for “<strong>sym</strong>bols”) have been developed.
 Let’s run RGBLINK to generate a sym file for our ROM:</p>
 <pre><code><span class="console-line hljs-meta"></span><span class="language-bash">rgblink -n hello-world.sym hello-world.o</span>
 </code></pre>
@@ -231,16 +213,7 @@ Let’s run RGBLINK to generate a sym file for our ROM:</p>
 <div><p>‼️</p></div>
 <div>
 <p>The file names matter!
-When looking for a ROM’s sym file, BGB takes the ROM’s file name, strips the extension (here, <code>.gb</code>), replaces it with <code>.sym</code>, and looks for a file <strong>in the same directory</strong> with that name.</p>
-</div>
-</div>
-<p>Then, in the debugger, we can go in the “File” menu and select “reload SYM file”.</p>
-<p><img src="../assets/img/labels.png" alt="Screenshot of the debugger showing the labels in the code viewer" /></p>
-<p>Much better!</p>
-<div class="box tip decorated">
-<div><p>🔍</p></div>
-<div>
-<p>If a sym file is loaded, pressing <kbd><kbd>Tab</kbd></kbd> allows toggling whether labels are displayed or not.</p>
+When looking for a ROM’s sym file, emulators take the ROM’s file name, strip the extension (here, <code>.gb</code>), replace it with <code>.sym</code>, and look for a file <strong>in the same directory</strong> with that name.</p>
 </div>
 </div>
 <h2 id="stepping"><a class="header" href="#stepping">Stepping</a></h2>
@@ -253,54 +226,51 @@ When looking for a ROM’s sym file, BGB takes the ROM’s file name, strips the
 </div>
 </div>
 <p>If we want to watch execution from the beginning, we need to reset the emulator.
-Go into the debugger’s “Run” menu, and select “Reset”, or tap your numpad’s <kbd><kbd>*</kbd></kbd> key.</p>
+Go into the emulator’s “File” menu, and select “Reset”, or press <kbd><kbd>Ctrl</kbd>+<kbd>Backspace</kbd></kbd>.</p>
 <p>The blue line should automatically move to address $0100<sup class="footnote-reference"><a href="#boot_addr">1</a></sup>, and now we’re ready to trace!
 All the commands for that are in the “Run” menu.</p>
 <ul>
-<li>“Run” simply unpauses the emulator. Clicking on the screen also does the same.</li>
-<li>“Trace” (more commonly known as “Step Into”) and “Step Over” advance the emulator by one instruction.
-They only really differ on the <code>call</code> instruction and interrupts, neither of which we are using here, so we will use “Trace”.</li>
+<li>“Resume” simply unpauses the emulator.</li>
+<li>“Step Into” and “Step Over” advance the emulator by one instruction.
+They only really differ on the <code>call</code> instruction, interrupts, and when encountering a conditional jump, neither of which we are using here, so we will use “Step Into”.</li>
 <li>The other options are not relevant for now.</li>
 </ul>
-<p>We will have to “Trace” a bunch of times, so it’s a good idea to use the key shortcut.
-If we press <kbd><kbd>F7</kbd></kbd> once, the <code>jp EntryPoint</code> is executed.
+<p>We will have to “Step Into” a bunch of times, so it’s a good idea to use the key shortcut.
+If we press <kbd><kbd>F5</kbd></kbd> once, the <code>jp EntryPoint</code> is executed.
 And if we press it a few more times, can see the instructions being executed, one by one!</p>
 <video controls poster="../assets/vid/reset_trace.poster.png">
   <source src="../assets/vid/reset_trace.webm" type="video/webm">
   <source src="../assets/vid/reset_trace.mp4" type="video/mp4">
-<img src="../assets/vid/reset_trace.gif" alt="Video demonstration in BGB">
+<img src="../assets/vid/reset_trace.gif" alt="Video demonstration in Emulicious">
 </video>
 <p>Now, you may notice the <code>WaitVBlank</code> loop runs a <em>lot</em> of times, but what we are interested in is the <code>CopyTiles</code> loop.
 We can easily skip over it in several ways; this time, we will use a <em>breakpoint</em>.
-We will place the breakpoint on the <code>ld de, Tiles</code> at <code>00:0162</code>; either double-click on that line, or select it and press <kbd><kbd>F2</kbd></kbd>.
-The line will turn red:</p>
+We will place the breakpoint on the <code>ld de, Tiles</code> at <code>00:0162</code>; either double-click on that line, or select it and press <kbd><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd></kbd>.</p>
 <p><img src="../assets/img/breakpoint.png" alt="Debugger screenshot showcasing the breakpoint" /></p>
-<p>Then you can resume execution either by clicking the screen or pressing <kbd><kbd>F9</kbd></kbd>, and BGB will automatically pause.
-Whenever BGB is running, and the (emulated) CPU is about to execute an instruction a breakpoint was placed on, it automatically pauses.</p>
+<p>Then you can resume execution by pressing <kbd><kbd>F8</kbd></kbd>.
+Whenever Emulicious is running, and the (emulated) CPU is about to execute an instruction a breakpoint was placed on, it automatically pauses.</p>
 <p><img src="../assets/img/bkpt_pause.png" alt="Debugger screenshot showcasing execution paused on the breakpoint" /></p>
 <p>You can see where execution is being paused both from the green arrow and the value of PC.</p>
 <p>If we trace the next three instructions, we can see the three arguments to the <code>CopyTiles</code> loop getting loaded into registers.</p>
 <p><img src="../assets/img/regs_copytiles.png" alt="The state of some registers at the beginning of the CopyTiles loop" /></p>
 <p>For fun, let’s watch the tiles as they’re being copied.
-For that, obviously, we will use the data viewer, and position it at the destination.
+For that, obviously, we will use the Memory Editor, and position it at the destination.
 As we can see from the image above, that would be $9000!</p>
-<p>Select the data viewer (either click somewhere in it, or use <kbd><kbd>Ctrl</kbd>+<kbd>Tab</kbd></kbd> to switch focus, as indicated by the grey bar on the left), and press Ctrl+G (for “Goto”).
-In the popup, type the address you wish to go to, in our case <code>9000</code> (sans dollar sign!!).</p>
+<p>Click on “Memory” on the bottom window, then “VRAM”, and press <kbd><kbd>Ctrl</kbd>+<kbd>G</kbd></kbd> (for “Goto”).</p>
 <video controls poster="../assets/vid/trace_copy.poster.png">
   <source src="../assets/vid/trace_copy.webm" type="video/webm">
   <source src="../assets/vid/trace_copy.mp4" type="video/mp4">
-<img src="../assets/vid/trace_copy.gif" alt="Video demonstration in BGB">
+<img src="../assets/vid/trace_copy.gif" alt="Video demonstration in Emulicious">
 </video>
 <p>Awesome, right?</p>
 <h2 id="what-next"><a class="header" href="#what-next">What next?</a></h2>
 <p>Congrats, you have just learned how to use a debugger!
-We have only scratched the surface, though; we will use more of BGB’s tools to illustrate the next parts.
+We have only scratched the surface, though; we will use more of Emulicious’ tools to illustrate the next parts.
 Don’t worry, from here on, lessons will go with a lot more images—you’ve made it through the hardest part!</p>
 <hr />
-<div class="footnote-definition" id="boot_addr"><sup class="footnote-definition-label">1</sup>
+<div class="footnote-definition" id="boot_addr"><sup class="footnote-definition-label">1</sup></div>
 <p>Why does execution start at $0100?
 That’s because it’s where the <a href="https://gbdev.io/pandocs/Power_Up_Sequence">boot ROM</a> hands off control to our game once it’s done.</p>
-</div>
 
                     </main>
 
