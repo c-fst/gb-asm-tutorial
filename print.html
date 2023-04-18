@@ -1703,7 +1703,7 @@ Explaining why requires a more thorough explanation of the Game Boy’s renderin
 </div>
 </div>
 <p>Now you should see the paddle moving… very quickly.
-Because it moves by a pixel ever frame, it’s going at a speed of 60 pixels per second!
+Because it moves by a pixel every frame, it’s going at a speed of 60 pixels per second!
 To slow this down, we’ll use a <em>variable</em>.</p>
 <p>So far, we have only worked with the CPU registers, but you can create global variables too!
 To do this, let’s create another section, but putting it in <code>WRAM0</code> instead of <code>ROM0</code>.
@@ -1845,7 +1845,7 @@ CopyPaddle:
 A game that plays itself isn’t very much fun, so let’s fix that.</p>
 <p>Paste this code below your <code>Main</code> loop.
 Like <code>Memcpy</code>, this is a function that can be reused from different places, using the <code>call</code> instruction.</p>
-<pre><code class="language-rgbasm linenos start=110">Input:
+<pre><code class="language-rgbasm linenos start=110">UpdateKeys:
   ; Poll half the controller
   ld a, P1F_GET_BTN
   call .onenibble
@@ -1907,7 +1907,7 @@ WaitVBlank2:
 	jp c, WaitVBlank2
 
 	; Check the current keys every frame and move left or right.
-	call Input
+	call UpdateKeys
 
 	; First, check if the left button is pressed.
 CheckLeft:
