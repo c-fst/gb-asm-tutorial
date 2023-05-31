@@ -1386,7 +1386,7 @@ msgid "The new section's name is \"`Header`\".\n"
 "The `ROM0` keyword indicates which \"memory type\" the section belongs to ([here is a list](https://rgbds.gbdev.io/docs/v0.5.2/rgbasm.5#SECTIONS)).\n"
 "We will discuss them in Part Ⅱ."
 msgstr "Il nome della nuova sezione è \"`Header`\".\n"
-"I nomi delle sezioni possono contenere qualsiasi carattere (e anche essere vuoti, se si vuole) e devono essere unici[^nome_sezione].\n"
+"I nomi delle sezioni possono contenere qualsiasi carattere (e anche essere vuoti, se si vuole) e devono essere unici[^sect_name].\n"
 "La parola chiave `ROM0` indica a quale \"tipo di memoria\" appartiene la sezione ([ecco un elenco](https://rgbds.gbdev.io/docs/v0.5.2/rgbasm.5#SECTIONS)).\n"
 "Ne parleremo nella Parte Ⅱ."
 
